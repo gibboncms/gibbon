@@ -1,0 +1,23 @@
+{
+    "name": "gibboncms/gibbon",
+    "description": "Core library for GibbonCms",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastian De Deyne",
+            "email": "sebastiandedeyne@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpspec/phpspec": "~2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "GibbonCms\\Gibbon\\": "src/"
+        }
+    },
+    "require": {
+        "league/flysystem": "~1.0",
+        "symfony/yaml": "~2.6"
+    }
+}
