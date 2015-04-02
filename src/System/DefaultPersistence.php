@@ -19,20 +19,28 @@ trait DefaultPersistence
     public function insert($entity)
     {
         $this->operations['insert'][] = $entity;
+
+        return $this;
     }
 
     public function update($entity)
     {
-        $this->operations['insert'][] = $entity;
+        $this->operations['update'][] = $entity;
+
+        return $this;
     }
 
     public function delete($entity)
     {
-        $this->operations['insert'][] = $entity;
+        $this->operations['delete'][] = $entity;
+
+        return $this;
     }
 
     public function save()
     {
+        // Todo: Make the operations array and workflow a bit more sophisticated
+
         foreach($operations['insert'] as $entity) $this->insertEntity($entity);
         foreach($operations['update'] as $entity) $this->updateEntity($entity);
         foreach($operations['delete'] as $entity) $this->deleteEntity($entity);
