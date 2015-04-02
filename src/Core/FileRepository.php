@@ -1,22 +1,23 @@
 <?php
 
-namespace GibbonCms\Gibbon\System;
+namespace GibbonCms\Gibbon\Core;
 
+use GibbonCms\Gibbon\System\Repository;
+use GibbonCms\Gibbon\System\RepositoryOptions;
+use GibbonCms\Gibbon\System\Factory;
 use League\Flysystem\Filesystem;
-use League\Flysystem\Adapter\Local as FilesystemAdapter;
 use League\Flysystem\Plugin\ListFiles;
 
 class FileRepository implements Repository
 {
     protected $factory;
-    protected $cache;
     protected $files;
 
-    public function __construct(Factory $factory, $config)
+    public function __construct(Factory $factory, RepositoryOptions $options)
     {
         $this->factory = $factory;
 
-        $this->filesystem = new Filesystem(new FilesystemAdapter($config['directory']));
+        $this->filesystem = new Filesystem($options->adapter());
         $this->filesystem->addPlugin(new ListFiles);
     }
 
@@ -45,21 +46,6 @@ class FileRepository implements Repository
         }
 
         return $this->factory->make($filename, $file);
-    }
-
-    public function where($query)
-    {
-
-    }
-
-    public function insert()
-    {
-
-    }
-
-    public function update()
-    {
-
     }
 
     protected function files()

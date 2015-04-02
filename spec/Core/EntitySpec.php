@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\GibbonCms\Gibbon;
+namespace spec\GibbonCms\Gibbon\Core;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -14,6 +14,6 @@ class EntitySpec extends ObjectBehavior
     
     function it_is_initializable()
     {
-        $this->shouldHaveType('GibbonCms\Gibbon\Entity');
+        $this->shouldHaveType('GibbonCms\Gibbon\Core\Entity');
     }
 }

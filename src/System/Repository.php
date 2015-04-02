@@ -2,17 +2,14 @@
 
 namespace GibbonCms\Gibbon\System;
 
+/**
+ * A repository provides a normalized interface to return entities from the persistence layer
+ */
 interface Repository
 {
-    public function __construct(Factory $factory, $config);
+    public function __construct(Factory $factory, RepositoryOptions $options);
 
     public function all();
 
     public function find($id);
-
-    public function where($query);
-
-    public function insert();
-
-    public function update();
 }

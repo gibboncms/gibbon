@@ -1,11 +1,12 @@
 <?php
 
-namespace GibbonCms\Gibbon\System;
+namespace GibbonCms\Gibbon\Core;
 
-use GibbonCms\Gibbon\Entity;
+use GibbonCms\Gibbon\Core\Entity;
+use GibbonCms\Gibbon\System\Factory;
 use Symfony\Component\Yaml\Parser as Yaml;
 
-class EntityFactory implements Factory
+class FileEntityFactory implements Factory
 {
     public function __construct()
     {

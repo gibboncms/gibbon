@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon;
+namespace GibbonCms\Gibbon\Core;
 
 class Entity
 {
@@ -11,5 +11,10 @@ class Entity
     {
         $this->id = $id;
         $this->created = $created;
+    }
+
+    public function id()
+    {
+        return $this->id;
     }
 }
