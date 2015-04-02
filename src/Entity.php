@@ -4,12 +4,12 @@ namespace GibbonCms\Gibbon;
 
 class Entity
 {
-    private $name;
-    private $contents;
+    protected $id;
+    protected $created;
     
-    public function __construct($name, $contents)
+    public function __construct($id, $created)
     {
-        $this->name = $name;
-        $this->contents = $contents;
+        $this->id = $id;
+        $this->created = $created;
     }
 }

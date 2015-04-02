@@ -1,12 +1,12 @@
 <?php
 
-namespace GibbonCms\Gibbon\Factories;
+namespace GibbonCms\Gibbon\System;
 
 use GibbonCms\Gibbon\Entity;
 
 interface Factory
 {
-    public function make($data);
+    public function make($id, $data);
 
     public function encode(Entity $entity);
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\GibbonCms\Gibbon\Repositories;
+namespace spec\GibbonCms\Gibbon\System;
 
-use GibbonCms\Gibbon\Factories\EntityFactory;
+use GibbonCms\Gibbon\System\EntityFactory;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -15,8 +15,13 @@ class FileRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('GibbonCms\Gibbon\Repositories\FileRepository');
-        $this->shouldImplement('GibbonCms\Gibbon\Repositories\Repository');
+        $this->shouldHaveType('GibbonCms\Gibbon\System\FileRepository');
+        $this->shouldImplement('GibbonCms\Gibbon\System\Repository');
+    }
+
+    function it_returns_a_list_of_entities()
+    {
+        $this->all()->shouldReturn(['lorem-ipsum']);
     }
 
     function it_finds_an_entity()

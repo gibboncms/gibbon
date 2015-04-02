@@ -1,8 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Repositories;
-
-use GibbonCms\Gibbon\Factories\Factory;
+namespace GibbonCms\Gibbon\System;
 
 interface Repository
 {
