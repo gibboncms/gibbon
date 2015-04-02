@@ -7,15 +7,15 @@ use GibbonCms\Gibbon\System\RepositoryOptions;
 
 class JsonRepositoryOptions implements RepositoryOptions
 {
-    protected $filename;
+    protected $source;
     
-    public function __construct($filename)
+    public function __construct($source)
     {
-        $this->filename = $filename;
+        $this->source = $source;
     }
 
-    public function filename()
+    public function source()
     {
-        return $this->filename;
+        return $this->source;
     }
 }

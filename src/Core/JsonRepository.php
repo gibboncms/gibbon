@@ -12,15 +12,15 @@ class JsonRepository implements Repository
     use DefaultPersistence;
 
     protected $factory;
-    protected $filename;
+    protected $source;
     protected $contents = [];
 
     public function __construct(Factory $factory, RepositoryOptions $options)
     {
         $this->factory = $factory;
-        $this->filename = $options->filename();
+        $this->source = $options->source();
 
-        $this->parseFile();
+        $this->parseSource();
     }
 
     public function all()
@@ -33,9 +33,9 @@ class JsonRepository implements Repository
         return isset($this->contents[$id]) ? $this->contents[$id] : null;
     }
 
-    protected function parseFile()
+    protected function parseSource()
     {
-        $contents = json_decode(file_get_contents($this->filename), true);
+        $contents = json_decode(file_get_contents($this->source), true);
 
         array_walk($contents, function($data, $name) {
             $entity = $this->factory->make($name, $data);
