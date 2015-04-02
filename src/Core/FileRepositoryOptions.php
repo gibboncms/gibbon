@@ -10,7 +10,7 @@ class FileRepositoryOptions implements RepositoryOptions
 {
     protected $adapter;
     
-    public function __construct(AdapterInterface $adapter, Repository $cache)
+    public function __construct(AdapterInterface $adapter, Repository $cache = null)
     {
         $this->adapter = $adapter;
         $this->cache = $cache;

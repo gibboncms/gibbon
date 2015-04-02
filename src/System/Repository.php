@@ -3,7 +3,7 @@
 namespace GibbonCms\Gibbon\System;
 
 /**
- * A repository provides a normalized interface to return entities from the persistence layer
+ * A repository returns entities from the persistence layer
  */
 interface Repository
 {
@@ -12,4 +12,14 @@ interface Repository
     public function all();
 
     public function find($id);
+
+    public function insert($entity);
+
+    public function update($entity);
+
+    public function delete($entity);
+
+    public function save();
+
+    public function clean();
 }

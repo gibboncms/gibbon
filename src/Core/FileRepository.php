@@ -2,6 +2,7 @@
 
 namespace GibbonCms\Gibbon\Core;
 
+use GibbonCms\Gibbon\System\DefaultPersistence;
 use GibbonCms\Gibbon\System\Repository;
 use GibbonCms\Gibbon\System\RepositoryOptions;
 use GibbonCms\Gibbon\System\Factory;
@@ -10,6 +11,8 @@ use League\Flysystem\Plugin\ListFiles;
 
 class FileRepository implements Repository
 {
+    use DefaultPersistence;
+
     protected $factory;
     protected $files;
 
@@ -65,5 +68,20 @@ class FileRepository implements Repository
         // Todo: Should the repo be handling this function?
 
         return preg_filter('/[0-9]{8}_/', '', $filename);
+    }
+
+    protected function insertEntity($entity)
+    {
+
+    }
+
+    protected function updateEntity($entity)
+    {
+
+    }
+
+    protected function deleteEntity($entity)
+    {
+
     }
 }
