@@ -10,11 +10,11 @@ trait DefaultPersistence
         'delete' => [],
     ];
 
-    abstract protected function insertEntity($entity);
+    abstract protected function persistInsert($entity);
 
-    abstract protected function updateEntity($entity);
+    abstract protected function persistUpdate($entity);
 
-    abstract protected function deleteEntity($entity);
+    abstract protected function persistDelete($entity);
 
     public function insert($entity)
     {
@@ -41,9 +41,9 @@ trait DefaultPersistence
     {
         // Todo: Make the operations array and workflow a bit more sophisticated
 
-        foreach($operations['insert'] as $entity) $this->insertEntity($entity);
-        foreach($operations['update'] as $entity) $this->updateEntity($entity);
-        foreach($operations['delete'] as $entity) $this->deleteEntity($entity);
+        foreach($operations['insert'] as $entity) $this->persistInsert($entity);
+        foreach($operations['update'] as $entity) $this->persistUpdate($entity);
+        foreach($operations['delete'] as $entity) $this->persistDelete($entity);
 
         $this->clean();
     }

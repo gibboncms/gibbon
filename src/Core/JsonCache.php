@@ -2,20 +2,17 @@
 
 namespace GibbonCms\Gibbon\Core;
 
-use GibbonCms\Gibbon\System\DefaultPersistence;
-use GibbonCms\Gibbon\System\Repository;
-use GibbonCms\Gibbon\System\RepositoryOptions;
+use GibbonCms\Gibbon\System\Cache;
+use GibbonCms\Gibbon\System\CacheOptions;
 use GibbonCms\Gibbon\System\Factory;
 
-class JsonRepository implements Repository
+class JsonCache implements Cache
 {
-    use DefaultPersistence;
-
     protected $factory;
     protected $source;
     protected $contents = [];
 
-    public function __construct(Factory $factory, RepositoryOptions $options)
+    public function __construct(Factory $factory, CacheOptions $options)
     {
         $this->factory = $factory;
         $this->source = $options->source();
@@ -25,7 +22,7 @@ class JsonRepository implements Repository
 
     public function all()
     {
-
+        return $this->contents;
     }
 
     public function find($id)
@@ -41,20 +38,5 @@ class JsonRepository implements Repository
             $entity = $this->factory->make($name, $data);
             $this->contents[$entity->id()] = $entity;
         });
-    }
-
-    protected function insertEntity($entity)
-    {
-
-    }
-
-    protected function updateEntity($entity)
-    {
-
-    }
-
-    protected function deleteEntity($entity)
-    {
-
     }
 }

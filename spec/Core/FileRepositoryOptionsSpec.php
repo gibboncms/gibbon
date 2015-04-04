@@ -3,8 +3,8 @@
 namespace spec\GibbonCms\Gibbon\Core;
 
 use GibbonCms\Gibbon\Core\JsonEntityFactory;
-use GibbonCms\Gibbon\Core\JsonRepository;
-use GibbonCms\Gibbon\Core\JsonRepositoryOptions;
+use GibbonCms\Gibbon\Core\JsonCache;
+use GibbonCms\Gibbon\Core\JsonCacheOptions;
 use League\Flysystem\Adapter\Local as FilesystemAdapter;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -15,9 +15,9 @@ class FileRepositoryOptionsSpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             new FilesystemAdapter(__DIR__ . '/../_fixtures/entities/'),
-            new JsonRepository(
+            new JsonCache(
                 new JsonEntityFactory,
-                new JsonRepositoryOptions(__DIR__ . '/../_fixtures/cache/entities.json')
+                new JsonCacheOptions(__DIR__ . '/../_fixtures/cache/entities.json')
             )
         );
     }

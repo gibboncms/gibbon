@@ -70,17 +70,17 @@ class FileRepository implements Repository
         return preg_filter('/[0-9]{8}_/', '', $filename);
     }
 
-    protected function insertEntity($entity)
+    protected function persistInsert($entity)
     {
 
     }
 
-    protected function updateEntity($entity)
+    protected function persistUpdate($entity)
     {
 
     }
 
-    protected function deleteEntity($entity)
+    protected function persistDelete($entity)
     {
 
     }

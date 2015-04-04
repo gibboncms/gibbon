@@ -5,7 +5,7 @@ namespace spec\GibbonCms\Gibbon\Core;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class JsonRepositoryOptionsSpec extends ObjectBehavior
+class JsonCacheOptionsSpec extends ObjectBehavior
 {
     function let()
     {
@@ -14,7 +14,7 @@ class JsonRepositoryOptionsSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('GibbonCms\Gibbon\Core\JsonRepositoryOptions');
-        $this->shouldImplement('GibbonCms\Gibbon\System\RepositoryOptions');
+        $this->shouldHaveType('GibbonCms\Gibbon\Core\JsonCacheOptions');
+        $this->shouldImplement('GibbonCms\Gibbon\System\CacheOptions');
     }
 }

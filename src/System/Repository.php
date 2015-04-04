@@ -2,9 +2,6 @@
 
 namespace GibbonCms\Gibbon\System;
 
-/**
- * A repository returns entities from the persistence layer
- */
 interface Repository
 {
     public function __construct(Factory $factory, RepositoryOptions $options);

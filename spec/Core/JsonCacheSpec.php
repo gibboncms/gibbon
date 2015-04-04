@@ -3,24 +3,29 @@
 namespace spec\GibbonCms\Gibbon\Core;
 
 use GibbonCms\Gibbon\Core\JsonEntityFactory;
-use GibbonCms\Gibbon\Core\JsonRepositoryOptions;
+use GibbonCms\Gibbon\Core\JsonCacheOptions;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class JsonRepositorySpec extends ObjectBehavior
+class JsonCacheSpec extends ObjectBehavior
 {
     function let()
     {
         $this->beConstructedWith(
             new JsonEntityFactory,
-            new JsonRepositoryOptions(__DIR__ . '/../_fixtures/cache/entities.json')
+            new JsonCacheOptions(__DIR__ . '/../_fixtures/cache/entities.json')
         );
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('GibbonCms\Gibbon\Core\JsonRepository');
-        $this->shouldImplement('GibbonCms\Gibbon\System\Repository');
+        $this->shouldHaveType('GibbonCms\Gibbon\Core\JsonCache');
+        $this->shouldImplement('GibbonCms\Gibbon\System\Cache');
+    }
+
+    function it_finds_all_entities()
+    {
+        $this->all()->shouldHaveCount(2);
     }
 
     function it_finds_an_entity()

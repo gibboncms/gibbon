@@ -2,10 +2,10 @@
 
 namespace GibbonCms\Gibbon\Core;
 
-use GibbonCms\Gibbon\System\Repository;
-use GibbonCms\Gibbon\System\RepositoryOptions;
+use GibbonCms\Gibbon\System\Cache;
+use GibbonCms\Gibbon\System\CacheOptions;
 
-class JsonRepositoryOptions implements RepositoryOptions
+class JsonCacheOptions implements CacheOptions
 {
     protected $source;
     
