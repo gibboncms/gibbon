@@ -2,28 +2,19 @@
 
 namespace spec\GibbonCms\Gibbon\Core;
 
-use GibbonCms\Gibbon\Core\JsonEntityFactory;
 use GibbonCms\Gibbon\Core\FileEntityFactory;
-use GibbonCms\Gibbon\Core\FileRepositoryOptions;
-use GibbonCms\Gibbon\Core\JsonCache;
-use GibbonCms\Gibbon\Core\JsonCacheOptions;
 use League\Flysystem\Adapter\Local as FilesystemAdapter;
+use League\Flysystem\Filesystem;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class FileRepositorySpec extends ObjectBehavior
 {
     function let()
     {
-        $cache = new JsonCache(
-            new JsonEntityFactory, 
-            new JsonCacheOptions(__DIR__ . '/../_fixtures/cache/entities.json')
+        $this->beConstructedWith(
+            new Filesystem(new FilesystemAdapter(__DIR__ . '/../_fixtures/entities/')),
+            new FileEntityFactory
         );
-
-        $adapter = new FilesystemAdapter(__DIR__ . '/../_fixtures/entities/');
-        $options = new FileRepositoryOptions($adapter, $cache);
-
-        $this->beConstructedWith(new FileEntityFactory, $options);
     }
 
     function it_is_initializable()
@@ -34,12 +25,12 @@ class FileRepositorySpec extends ObjectBehavior
 
     function it_returns_a_list_of_entities()
     {
-        $this->all()->shouldReturn(['lorem-ipsum']);
+        $this->all()->shouldHaveCount(2);
     }
 
-    function it_finds_an_entity()
+    function it_gets_an_entity()
     {
-        $this->find('lorem-ipsum')->shouldHaveType('GibbonCms\Gibbon\Core\Entity');
-        $this->find('lorem-ipsum')->id()->shouldReturn('lorem-ipsum');
+        $this->get('20150402_lorem-ipsum')->shouldHaveType('GibbonCms\Gibbon\Core\Page');
+        $this->get('20150402_lorem-ipsum')->id()->shouldReturn('20150402_lorem-ipsum');
     }
 }

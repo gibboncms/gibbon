@@ -2,7 +2,7 @@
 
 namespace GibbonCms\Gibbon\Core;
 
-class Entity
+class Page
 {
     protected $id;
     protected $created;

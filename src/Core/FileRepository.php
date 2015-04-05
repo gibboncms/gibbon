@@ -2,86 +2,77 @@
 
 namespace GibbonCms\Gibbon\Core;
 
-use GibbonCms\Gibbon\System\DefaultPersistence;
 use GibbonCms\Gibbon\System\Repository;
-use GibbonCms\Gibbon\System\RepositoryOptions;
 use GibbonCms\Gibbon\System\Factory;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Plugin\ListFiles;
 
 class FileRepository implements Repository
 {
-    use DefaultPersistence;
-
     protected $factory;
-    protected $files;
+    protected $filesystem;
+    protected $cache = [];
 
-    public function __construct(Factory $factory, RepositoryOptions $options)
+    public function __construct(Filesystem $filesystem, Factory $factory)
     {
         $this->factory = $factory;
 
-        $this->filesystem = new Filesystem($options->adapter());
+        $this->filesystem = $filesystem;
         $this->filesystem->addPlugin(new ListFiles);
+
+        if ($this->filesystem->has('.cache')) {
+            $this->loadCache();
+        } else {
+            $this->buildCache();
+        }
     }
 
     public function all()
     {
-        return array_reduce($this->files(), function($filenames, $file) {
-            $filenames[] = $this->parseId($file['filename']);
-            return $filenames;
-        }, []);
+        return $this->cache;
     }
 
-    public function find($id)
+    public function get($id)
     {
-        $filename = null;
-        $file = null;
+        return $this->cache[$id];
+    }
 
-        foreach ($this->files() as $iFile) {
+    public function insert($entity)
+    {
 
-            $iId = $this->parseId($iFile['filename']);
+    }
 
-            if ($iId == $id) {
-                $filename = $iFile['filename'];
-                $file = $this->filesystem->read($iFile['basename']);
-                break;
+    public function update($entity)
+    {
+
+    }
+
+    public function delete($entity)
+    {
+
+    }
+
+    protected function buildCache()
+    {
+        $files = $this->filesystem->listFiles();
+
+        $this->cache = [];
+
+        foreach ($files as $file) {
+            if ($file['extension'] == 'md') {
+                $entity = $this->factory->make(
+                    $file['filename'],
+                    $this->filesystem->read($file['path'])
+                );
+                $this->cache[$entity->id()] = $entity;
             }
         }
 
-        return $this->factory->make($filename, $file);
+        return $this->filesystem->put('.cache', serialize($this->cache));
     }
 
-    protected function files()
+    protected function loadCache()
     {
-        // Todo: This will probably be handled by the cache
-
-        if (is_null($this->files))
-        {
-            $this->files = $this->filesystem->listFiles();
-        }
-
-        return $this->files;
-    }
-
-    protected function parseId($filename)
-    {
-        // Todo: Should the repo be handling this function?
-
-        return preg_filter('/[0-9]{8}_/', '', $filename);
-    }
-
-    protected function persistInsert($entity)
-    {
-
-    }
-
-    protected function persistUpdate($entity)
-    {
-
-    }
-
-    protected function persistDelete($entity)
-    {
-
+        $this->cache = unserialize($this->filesystem->read('.cache'));
     }
 }

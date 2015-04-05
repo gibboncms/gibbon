@@ -3,7 +3,6 @@
 namespace spec\GibbonCms\Gibbon\Core;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class FileEntityFactorySpec extends ObjectBehavior
 {
