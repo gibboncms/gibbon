@@ -2,11 +2,12 @@
 
 namespace GibbonCms\Gibbon\Core;
 
+use DateTime;
 use GibbonCms\Gibbon\System\Entity;
 use GibbonCms\Gibbon\System\Factory;
 use Symfony\Component\Yaml\Parser as Yaml;
 
-class FileEntityFactory implements Factory
+class FilePageFactory implements Factory
 {
     public function __construct()
     {
@@ -19,7 +20,10 @@ class FileEntityFactory implements Factory
 
         $meta = $this->yaml->parse($rawMeta);
 
-        return new Page($id, $meta['created']);
+        $title = $meta['title'];
+        $created = DateTime::createFromFormat('U', $meta['created']);
+
+        return new Page($id, $title, $created);
     }
 
     public function encode($entity)

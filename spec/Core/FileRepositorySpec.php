@@ -2,7 +2,7 @@
 
 namespace spec\GibbonCms\Gibbon\Core;
 
-use GibbonCms\Gibbon\Core\FileEntityFactory;
+use GibbonCms\Gibbon\Core\FilePageFactory;
 use League\Flysystem\Adapter\Local as FilesystemAdapter;
 use League\Flysystem\Filesystem;
 use PhpSpec\ObjectBehavior;
@@ -12,8 +12,8 @@ class FileRepositorySpec extends ObjectBehavior
     function let()
     {
         $this->beConstructedWith(
-            new Filesystem(new FilesystemAdapter(__DIR__ . '/../_fixtures/entities/')),
-            new FileEntityFactory
+            new Filesystem(new FilesystemAdapter(__DIR__ . '/../_fixtures/pages/')),
+            new FilePageFactory
         );
     }
 

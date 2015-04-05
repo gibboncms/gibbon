@@ -4,10 +4,10 @@ namespace spec\GibbonCms\Gibbon\Core;
 
 use PhpSpec\ObjectBehavior;
 
-class FileEntityFactorySpec extends ObjectBehavior
+class FilePageFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('GibbonCms\Gibbon\Core\FileEntityFactory');
+        $this->shouldHaveType('GibbonCms\Gibbon\Core\FilePageFactory');
     }
 }
