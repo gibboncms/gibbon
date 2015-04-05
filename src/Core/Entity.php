@@ -3,18 +3,23 @@
 namespace GibbonCms\Gibbon\Core;
 
 use DateTime;
-use GibbonCms\Gibbon\System\Entity;
 
-class Page extends Entity
+class Entity
 {
+    protected $id;
     protected $title;
+    protected $created;
     
     public function __construct($id, $title, DateTime $created)
     {
-        parent::__construct($id);
-
+        $this->id = $id;
         $this->title = $title;
         $this->created = $created;
+    }
+
+    public function id()
+    {
+        return $this->id;
     }
 
     public function created()

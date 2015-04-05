@@ -2,7 +2,7 @@
 
 namespace spec\GibbonCms\Gibbon\Core;
 
-use GibbonCms\Gibbon\Core\FilePageFactory;
+use GibbonCms\Gibbon\Core\FileEntityFactory;
 use League\Flysystem\Adapter\Local as FilesystemAdapter;
 use League\Flysystem\Filesystem;
 use PhpSpec\ObjectBehavior;
@@ -12,8 +12,8 @@ class FileRepositorySpec extends ObjectBehavior
     function let()
     {
         $this->beConstructedWith(
-            new Filesystem(new FilesystemAdapter(__DIR__ . '/../_fixtures/pages/')),
-            new FilePageFactory
+            new Filesystem(new FilesystemAdapter(__DIR__ . '/../_fixtures/entities/')),
+            new FileEntityFactory
         );
     }
 
@@ -30,7 +30,7 @@ class FileRepositorySpec extends ObjectBehavior
 
     function it_gets_an_entity()
     {
-        $this->get('20150402_lorem-ipsum')->shouldHaveType('GibbonCms\Gibbon\Core\Page');
+        $this->get('20150402_lorem-ipsum')->shouldHaveType('GibbonCms\Gibbon\Core\Entity');
         $this->get('20150402_lorem-ipsum')->id()->shouldReturn('20150402_lorem-ipsum');
     }
 }
