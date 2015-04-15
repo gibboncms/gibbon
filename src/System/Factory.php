@@ -5,5 +5,5 @@ namespace GibbonCms\Gibbon\System;
 interface Factory
 {
     public function make($id, $data);
-    public function encode($entity);
+    public static function makes();
 }

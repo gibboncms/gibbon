@@ -1,5 +1,0 @@
-suites:
-    gibbon_suite:
-        namespace: GibbonCms\Gibbon
-        psr4_prefix: GibbonCms\Gibbon
-        src_path: src

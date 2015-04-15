@@ -1,13 +1,15 @@
 <?php
 
-namespace GibbonCms\Gibbon\Core;
+namespace GibbonCms\Gibbon\Entities;
 
 use DateTime;
 use GibbonCms\Gibbon\System\Factory;
 use Symfony\Component\Yaml\Parser as Yaml;
 
-class FileEntityFactory implements Factory
+final class EntityFactory implements Factory
 {
+    private $yaml;
+
     public function __construct()
     {
         $this->yaml = new Yaml;
@@ -25,8 +27,8 @@ class FileEntityFactory implements Factory
         return new Entity($id, $title, $created);
     }
 
-    public function encode($entity)
+    public static function makes()
     {
-
+        return Entity::class;
     }
 }

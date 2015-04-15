@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Core;
+namespace GibbonCms\Gibbon\Entities;
 
 use DateTime;
 
