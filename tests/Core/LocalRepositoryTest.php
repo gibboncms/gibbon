@@ -5,8 +5,6 @@ namespace tests\Core;
 use GibbonCms\Gibbon\Core\LocalRepository;
 use GibbonCms\Gibbon\Entities\EntityFactory;
 use PHPUnit_Framework_TestCase as TestCase;
-use tests\Core\Cache\StashCacheTest;
-use tests\Core\Filesystem\FlysystemFilesystemTest;
 
 class LocalRepositoryTest extends TestCase
 {

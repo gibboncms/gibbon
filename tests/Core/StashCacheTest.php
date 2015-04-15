@@ -1,15 +1,15 @@
 <?php
 
-namespace tests\Core\Cache;
+namespace tests\Core;
 
-use GibbonCms\Gibbon\Core\Cache\StashCache;
+use GibbonCms\Gibbon\Core\StashCache;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class StashCacheTest extends TestCase
 {
     static function make()
     {
-        return new StashCache(__DIR__ . '/../../_fixtures/entities/.cache');
+        return new StashCache(__DIR__ . '/../fixtures/entities/.cache');
     }
 
     /** @test */

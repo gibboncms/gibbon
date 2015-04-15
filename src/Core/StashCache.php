@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Core\Cache;
+namespace GibbonCms\Gibbon\Core;
 
 use Stash\Driver\FileSystem as Driver;
 use Stash\Pool;

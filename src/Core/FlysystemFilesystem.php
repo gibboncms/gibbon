@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Core\Filesystem;
+namespace GibbonCms\Gibbon\Core;
 
 use League\Flysystem\Adapter\Local as FlysystemAdapter;
 use League\Flysystem\Filesystem as Flysystem;

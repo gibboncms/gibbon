@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Core\Cache;
+namespace GibbonCms\Gibbon\Core;
 
 interface Cache
 {

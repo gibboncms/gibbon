@@ -2,8 +2,6 @@
 
 namespace GibbonCms\Gibbon\Core;
 
-use GibbonCms\Gibbon\Core\Cache\Cache;
-use GibbonCms\Gibbon\Core\Filesystem\Filesystem;
 use GibbonCms\Gibbon\System\Repository;
 use GibbonCms\Gibbon\System\Factory;
 

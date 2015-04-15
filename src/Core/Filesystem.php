@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Core\Filesystem;
+namespace GibbonCms\Gibbon\Core;
 
 interface Filesystem
 {

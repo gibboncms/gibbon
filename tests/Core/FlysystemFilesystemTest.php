@@ -1,15 +1,15 @@
 <?php
 
-namespace tests\Core\Filesystem;
+namespace tests\Core;
 
-use GibbonCms\Gibbon\Core\Filesystem\FlysystemFilesystem;
+use GibbonCms\Gibbon\Core\FlysystemFilesystem;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class FlysystemFilesystemTest extends TestCase
 {
     static function make()
     {
-        return new FlysystemFilesystem(__DIR__ . '/../../_fixtures/entities/');
+        return new FlysystemFilesystem(__DIR__ . '/../fixtures/entities/');
     }
 
     /** @test */
