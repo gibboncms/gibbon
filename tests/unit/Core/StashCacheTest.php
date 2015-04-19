@@ -1,17 +1,12 @@
 <?php
 
-namespace tests\Core;
+namespace tests\unit\Core;
 
 use GibbonCms\Gibbon\Core\StashCache;
-use PHPUnit_Framework_TestCase as TestCase;
+use tests\unit\TestCase;
 
 class StashCacheTest extends TestCase
 {
-    static function make()
-    {
-        return new StashCache(__DIR__ . '/../fixtures/entities/.cache');
-    }
-
     /** @test */
     function it_is_initializable()
     {
