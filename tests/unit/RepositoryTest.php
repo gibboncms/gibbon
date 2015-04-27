@@ -1,20 +1,19 @@
 <?php
 
-namespace tests\unit\Core;
+namespace tests\unit;
 
-use GibbonCms\Gibbon\Core\Cache;
-use GibbonCms\Gibbon\Core\Filesystem;
-use GibbonCms\Gibbon\Core\Repository;
+use GibbonCms\Gibbon\Cache;
+use GibbonCms\Gibbon\Filesystem;
+use GibbonCms\Gibbon\Repository;
 use tests\stubs\Entity\EntityFactory;
-use tests\unit\TestCase;
 
 class RepositoryTest extends TestCase
 {
     function setUp()
     {
         $this->repository = new Repository(
-            new Filesystem(__DIR__ . '/../../fixtures/entities/'),
-            new Cache(__DIR__ . '/../../fixtures/entities/.cache'),
+            new Filesystem($this->fixtures . '/entities/'),
+            new Cache($this->fixtures . '/entities/.cache'),
             new EntityFactory
         );
 

@@ -1,15 +1,14 @@
 <?php
 
-namespace tests\unit\Core;
+namespace tests\unit;
 
-use GibbonCms\Gibbon\Core\Cache;
-use tests\unit\TestCase;
+use GibbonCms\Gibbon\Cache;
 
 class CacheTest extends TestCase
 {
     function setUp()
     {
-        $this->cache = new Cache(__DIR__ . '/../../fixtures/entities/.cache');
+        $this->cache = new Cache($this->fixtures . '/entities/.cache');
     }
     
     /** @test */
@@ -19,10 +18,10 @@ class CacheTest extends TestCase
     }
 
     /** @test */
-    function it_sets_and_gets_a_value()
+    function it_places_and_gets_a_value()
     {
         $cache = $this->cache;
-        $cache->set('foo', 'bar');
+        $cache->place('foo', 'bar');
 
         $this->assertEquals('bar', $cache->get('foo'));
     }
@@ -31,7 +30,7 @@ class CacheTest extends TestCase
     function it_can_flush()
     {
         $cache = $this->cache;
-        $cache->set('foo', 'bar');
+        $cache->place('foo', 'bar');
         $cache->flush();
 
         $this->assertNotEquals('bar', $cache->get('foo'));

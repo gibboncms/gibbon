@@ -1,15 +1,14 @@
 <?php
 
-namespace tests\unit\Core;
+namespace tests\unit;
 
-use GibbonCms\Gibbon\Core\Filesystem;
-use tests\unit\TestCase;
+use GibbonCms\Gibbon\Filesystem;
 
 class FilesystemTest extends TestCase
 {
     function setUp()
     {
-        $this->filesystem = new Filesystem(__DIR__ . '/../../fixtures/entities/');
+        $this->filesystem = new Filesystem($this->fixtures . '/entities/');
     }
 
     /** @test */

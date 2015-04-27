@@ -2,15 +2,26 @@
 
 namespace tests\stubs\Entity;
 
-use GibbonCms\Gibbon\System\Factory;
+use GibbonCms\Gibbon\Contracts\Factory;
 
 class EntityFactory implements Factory
 {
-    public function make($id, $data)
+    /**
+     * Transform raw data to an entity
+     * 
+     * @param mixed $data
+     * @return \GibbonCms\Gibbon\Contracts\Entity
+     */
+    public function make($data)
     {
-        return new Entity($id, $data);
+        return new Entity($data['id'], $data['data']);
     }
 
+    /**
+     * Return the classname of the entity this factory makes
+     * 
+     * @return string
+     */
     public static function makes()
     {
         return Entity::class;
