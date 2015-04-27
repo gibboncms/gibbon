@@ -5,5 +5,6 @@ namespace GibbonCms\Gibbon\System;
 interface Repository
 {
     public function index();
-    public function get($id);
+    public function find($id);
+    public function getAll();
 }

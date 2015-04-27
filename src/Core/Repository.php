@@ -2,10 +2,10 @@
 
 namespace GibbonCms\Gibbon\Core;
 
-use GibbonCms\Gibbon\System\Repository;
+use GibbonCms\Gibbon\System\Repository as RepositoryContract;
 use GibbonCms\Gibbon\System\Factory;
 
-final class LocalRepository implements Repository
+final class Repository implements RepositoryContract
 {
     private $factory;
     private $filesystem;
@@ -23,12 +23,20 @@ final class LocalRepository implements Repository
         return $this->cache->get('_list');
     }
 
-    public function get($id)
+    public function find($id)
     {
         return $this->cache->get($id);
     }
 
-    public function refresh()
+    public function getAll()
+    {
+        return array_reduce($this->index(), function($carry, $id) {
+            $carry[] = $this->find($id);
+            return $carry;
+        }, []);
+    }
+
+    public function build()
     {
         $files = $this->filesystem->listFiles();
 
@@ -43,7 +51,7 @@ final class LocalRepository implements Repository
                     $file['filename'],
                     $this->filesystem->read($file['path'])
                 );
-                $this->cache->set($entity->id(), $entity);
+                $this->cache->set($entity->getId(), $entity);
             }
         }
     }
