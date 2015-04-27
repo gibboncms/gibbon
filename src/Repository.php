@@ -7,9 +7,26 @@ use GibbonCms\Gibbon\Contracts\Factory;
 
 class Repository implements RepositoryContract
 {
-    private $factory;
+    /**
+     * The filesystem is used to read and write files
+     * 
+     * @var \GibbonCms\Gibbon\Contracts\Filesystem
+     */
     private $filesystem;
+
+    /**
+     * We're using a cache because file io is slow
+     * 
+     * @var \GibbonCms\Gibbon\Contracts\Cache
+     */
     private $cache;
+
+    /**
+     * The entity factory transforms raw data to a usable entity
+     * 
+     * @var \GibbonCms\Gibbon\Contracts\Factory
+     */
+    private $factory;
 
     /**
      * Constructor method injects all dependencies
