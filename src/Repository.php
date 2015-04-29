@@ -2,39 +2,39 @@
 
 namespace GibbonCms\Gibbon;
 
-use GibbonCms\Gibbon\Contracts\Entity;
-use GibbonCms\Gibbon\Contracts\Factory;
-use GibbonCms\Gibbon\Contracts\Repository as RepositoryContract;
+use GibbonCms\Gibbon\Interfaces\Entity;
+use GibbonCms\Gibbon\Interfaces\Factory;
+use GibbonCms\Gibbon\Interfaces\Repository as RepositoryInterface;
 
-class Repository implements RepositoryContract
+class Repository implements RepositoryInterface
 {
     /**
      * The filesystem is used to read and write files
      * 
-     * @var \GibbonCms\Gibbon\Contracts\Filesystem
+     * @var \GibbonCms\Gibbon\Interfaces\Filesystem
      */
     private $filesystem;
 
     /**
      * We're using a cache because file io is slow
      * 
-     * @var \GibbonCms\Gibbon\Contracts\Cache
+     * @var \GibbonCms\Gibbon\Interfaces\Cache
      */
     private $cache;
 
     /**
      * The entity factory transforms raw data to a usable entity
      * 
-     * @var \GibbonCms\Gibbon\Contracts\Factory
+     * @var \GibbonCms\Gibbon\Interfaces\Factory
      */
     private $factory;
 
     /**
      * Constructor method injects all dependencies
      * 
-     * @param \GibbonCms\Gibbon\Contracts\Filesystem $filesystem
-     * @param \GibbonCms\Gibbon\Contracts\Cache $cache
-     * @param \GibbonCms\Gibbon\Contracts\Factory $factory
+     * @param \GibbonCms\Gibbon\Interfaces\Filesystem $filesystem
+     * @param \GibbonCms\Gibbon\Interfaces\Cache $cache
+     * @param \GibbonCms\Gibbon\Interfaces\Factory $factory
      */
     public function __construct(Filesystem $filesystem, Cache $cache, Factory $factory)
     {
@@ -57,7 +57,7 @@ class Repository implements RepositoryContract
      * Find an entity by id
      * 
      * @param mixed $id
-     * @return \GibbonCms\Gibbon\Contracts\Entity
+     * @return \GibbonCms\Gibbon\Interfaces\Entity
      */
     public function find($id)
     {
@@ -67,7 +67,7 @@ class Repository implements RepositoryContract
     /**
      * Return all entities
      * 
-     * @return \GibbonCms\Gibbon\Contracts\Entity[]
+     * @return \GibbonCms\Gibbon\Interfaces\Entity[]
      */
     public function getAll()
     {
@@ -80,7 +80,7 @@ class Repository implements RepositoryContract
     /**
      * SAve an entity
      * 
-     * @param \GibbonCms\Gibbon\Contracts\Entity
+     * @param \GibbonCms\Gibbon\Interfaces\Entity
      * @return bool
      */
     public function save(Entity $entity)

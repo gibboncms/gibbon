@@ -2,24 +2,24 @@
 
 namespace GibbonCms\Gibbon;
 
-use GibbonCms\Gibbon\Contracts\Entity;
-use GibbonCms\Gibbon\Contracts\Factory as FactoryContract;
+use GibbonCms\Gibbon\Interfaces\Entity;
+use GibbonCms\Gibbon\Interfaces\Factory as FactoryInterface;
 use ReflectionObject;
 
-abstract class Factory implements FactoryContract
+abstract class Factory implements FactoryInterface
 {
     /**
      * Transform raw data to an entity
      * 
      * @param mixed $data
-     * @return \GibbonCms\Gibbon\Contracts\Entity
+     * @return \GibbonCms\Gibbon\Interfaces\Entity
      */
     abstract public function make($data);
 
     /**
      * Transform an entity to raw data
      * 
-     * @param \GibbonCms\Gibbon\Contracts\Entity
+     * @param \GibbonCms\Gibbon\Interfaces\Entity
      * @return string
      */
     abstract public function encode(Entity $entity);
@@ -35,7 +35,7 @@ abstract class Factory implements FactoryContract
      * Return an entity prototype for this factory (an empty entity that hasn't been constructed).
      * All hail doctrine.
      * 
-     * @return \GibbonCms\Gibbon\Contracts\Entity
+     * @return \GibbonCms\Gibbon\Interfaces\Entity
      */
     protected function getPrototype()
     {
@@ -50,7 +50,7 @@ abstract class Factory implements FactoryContract
      * Create a new entity instance and return it filled with attributes
      * 
      * @param array $attributes
-     * @return \GibbonCms\Gibbon\Contracts\Entity
+     * @return \GibbonCms\Gibbon\Interfaces\Entity
      */
     protected function createAndFill(array $attributes)
     {

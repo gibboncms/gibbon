@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Contracts;
+namespace GibbonCms\Gibbon\Interfaces;
 
 interface Entity 
 {

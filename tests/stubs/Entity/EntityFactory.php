@@ -2,8 +2,8 @@
 
 namespace tests\stubs\Entity;
 
-use GibbonCms\Gibbon\Contracts\Entity as EntityContract;
-use GibbonCms\Gibbon\Contracts\Factory;
+use GibbonCms\Gibbon\Interfaces\Entity as EntityInterface;
+use GibbonCms\Gibbon\Interfaces\Factory;
 
 class EntityFactory implements Factory
 {
@@ -11,7 +11,7 @@ class EntityFactory implements Factory
      * Transform raw data to an entity
      * 
      * @param mixed $data
-     * @return \GibbonCms\Gibbon\Contracts\Entity
+     * @return \GibbonCms\Gibbon\Interfaces\Entity
      */
     public function make($data)
     {
@@ -21,10 +21,10 @@ class EntityFactory implements Factory
     /**
      * Transform an entity to raw data
      * 
-     * @param \GibbonCms\Gibbon\Contracts\Entity
+     * @param \GibbonCms\Gibbon\Interfaces\Entity
      * @return string
      */
-    public function encode(EntityContract $entity)
+    public function encode(EntityInterface $entity)
     {
         return $entity->getData();
     }

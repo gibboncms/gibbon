@@ -4,9 +4,9 @@ namespace GibbonCms\Gibbon;
 
 use Stash\Driver\FileSystem as Driver;
 use Stash\Pool;
-use GibbonCms\Gibbon\Contracts\Cache as CacheContract;
+use GibbonCms\Gibbon\Interfaces\Cache as CacheInterface;
 
-class Cache implements CacheContract
+class Cache implements CacheInterface
 {
     /**
      * The stash pool

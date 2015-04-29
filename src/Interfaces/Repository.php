@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Contracts;
+namespace GibbonCms\Gibbon\Interfaces;
 
 interface Repository
 {
@@ -29,7 +29,7 @@ interface Repository
     /**
      * Save an entity
      * 
-     * @param \GibbonCms\Gibbon\Contracts\Entity
+     * @param \GibbonCms\Gibbon\Interfaces\Entity
      * @return bool
      */
     public function save(Entity $entity);

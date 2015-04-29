@@ -2,12 +2,12 @@
 
 namespace GibbonCms\Gibbon;
 
-use GibbonCms\Gibbon\Contracts\Filesystem as FilesystemContract;
+use GibbonCms\Gibbon\Interfaces\Filesystem as FilesystemInterface;
 use League\Flysystem\Adapter\Local as FlysystemAdapter;
 use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\Plugin\ListFiles;
 
-class Filesystem implements FilesystemContract
+class Filesystem implements FilesystemInterface
 {
     /**
      * Constructor method

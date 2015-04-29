@@ -2,9 +2,9 @@
 
 namespace tests\stubs\Entity;
 
-use GibbonCms\Gibbon\Contracts\Entity as EntityContract;
+use GibbonCms\Gibbon\Interfaces\Entity as EntityInterface;
 
-class Entity implements EntityContract
+class Entity implements EntityInterface
 {
     /**
      * @var string
