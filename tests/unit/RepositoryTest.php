@@ -28,17 +28,10 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function it_returns_a_list_of_entities()
-    {
-        $this->assertCount(2, $this->repository->index());
-        $this->assertContains('20150424_lorem-ipsum', $this->repository->index());
-    }
-
-    /** @test */
     function it_returns_an_entity()
     {
-        $this->assertInstanceOf(EntityFactory::makes(), $this->repository->find('20150424_lorem-ipsum'));
-        $this->assertEquals('20150424_lorem-ipsum', $this->repository->find('20150424_lorem-ipsum')->getId());
+        $this->assertInstanceOf(EntityFactory::makes(), $this->repository->find(1));
+        $this->assertEquals(1, $this->repository->find(1)->getId());
     }
 
     /** @test */
@@ -51,21 +44,25 @@ class RepositoryTest extends TestCase
     /** @test */
     function it_saves_an_entity()
     {
-        $entity = new Entity('20150429_stub', 'lorem ipsum dolor sit');
+        $entity = new Entity('stub', 'lorem ipsum dolor sit');
         $this->assertTrue($this->repository->save($entity));
 
-        @unlink($this->fixtures . '/entities/20150429_stub.md');
+        $this->assertEquals($entity->getId(), $this->repository->find($entity->getId())->getId());
+     
+        @unlink($this->fixtures . '/entities/' . $entity->getId() . '-stub.md');
     }
 
     /** @test */
     function it_updates_an_existing_entity()
     {
-        $entity = new Entity('20150429_stub', 'lorem ipsum dolor sit');
+        $entity = new Entity('stub', 'lorem ipsum dolor sit');
         $this->repository->save($entity);
 
         $entity->setData('foo bar baz');
         $this->assertTrue($this->repository->save($entity));
 
-        @unlink($this->fixtures . '/entities/20150429_stub.md');
+        $this->assertEquals('foo bar baz', $this->repository->find($entity->getId())->getData());
+
+        @unlink($this->fixtures . '/entities/' . $entity->getId() . '-stub.md');
     }
 }

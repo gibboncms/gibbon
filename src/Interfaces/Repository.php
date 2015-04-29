@@ -5,32 +5,25 @@ namespace GibbonCms\Gibbon\Interfaces;
 interface Repository
 {
     /**
-     * Return a list of all entity id's
-     * 
-     * @return array
-     */
-    public function index();
-
-    /**
      * Find an entity by id
      * 
      * @param mixed $id
-     * @return \GibbonCms\System\Entity
+     * @return mixed
      */
     public function find($id);
 
     /**
      * Return all entities
      * 
-     * @return \GibbonCms\System\Entity[]
+     * @return mixed[]
      */
     public function getAll();
 
     /**
      * Save an entity
      * 
-     * @param \GibbonCms\Gibbon\Interfaces\Entity
+     * @param mixed
      * @return bool
      */
-    public function save(Entity $entity);
+    public function save($entity);
 }

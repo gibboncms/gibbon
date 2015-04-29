@@ -7,15 +7,15 @@ interface Factory
     /**
      * Transform raw data to an entity
      * 
-     * @param mixed $data
-     * @return \GibbonCms\Gibbon\Interfaces\Entity
+     * @param array $data
+     * @return mixed
      */
     public function make($data);
 
     /**
      * Transform an entity to raw data
      * 
-     * @param \GibbonCms\Gibbon\Interfaces\Entity
+     * @param mixed
      * @return string
      */
     public function encode($entity);

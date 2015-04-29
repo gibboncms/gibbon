@@ -2,15 +2,10 @@
 
 namespace tests\stubs\Entity;
 
-use GibbonCms\Gibbon\Interfaces\Entity as EntityInterface;
+use GibbonCms\Gibbon\Entity as BaseEntity;
 
-class Entity implements EntityInterface
+class Entity extends BaseEntity
 {
-    /**
-     * @var string
-     */
-    protected $id;
-
     /**
      * @var string
      */
@@ -20,27 +15,11 @@ class Entity implements EntityInterface
      * @param string $id
      * @param string $data
      */
-    public function __construct($id, $data)
+    public function __construct($slug, $data)
     {
-        $this->id = $id;
+        parent::__construct($slug);
+
         $this->data = $data;
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param string
-     * @return void
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**

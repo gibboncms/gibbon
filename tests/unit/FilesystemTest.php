@@ -31,7 +31,7 @@ class FilesystemTest extends TestCase
     /** @test */
     function it_reads_a_file()
     {
-        $this->assertNotEmpty($this->filesystem->read('20150424_lorem-ipsum.md'));
+        $this->assertNotEmpty($this->filesystem->read('1-lorem-ipsum.md'));
     }
 
     /** @test */

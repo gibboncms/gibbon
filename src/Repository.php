@@ -2,9 +2,9 @@
 
 namespace GibbonCms\Gibbon;
 
-use GibbonCms\Gibbon\Interfaces\Entity;
 use GibbonCms\Gibbon\Interfaces\Factory;
 use GibbonCms\Gibbon\Interfaces\Repository as RepositoryInterface;
+use ReflectionObject;
 
 class Repository implements RepositoryInterface
 {
@@ -44,20 +44,10 @@ class Repository implements RepositoryInterface
     }
 
     /**
-     * Return a list of all entity id's
-     * 
-     * @return array
-     */
-    public function index()
-    {
-        return $this->cache->get('_list');
-    }
-
-    /**
      * Find an entity by id
      * 
      * @param mixed $id
-     * @return \GibbonCms\Gibbon\Interfaces\Entity
+     * @return mixed
      */
     public function find($id)
     {
@@ -67,28 +57,41 @@ class Repository implements RepositoryInterface
     /**
      * Return all entities
      * 
-     * @return \GibbonCms\Gibbon\Interfaces\Entity[]
+     * @return mixed[]
      */
     public function getAll()
     {
-        return array_reduce($this->index(), function($carry, $id) {
+        return array_reduce($this->cache->get('_list'), function($carry, $id) {
             $carry[] = $this->find($id);
             return $carry;
         }, []);
     }
 
     /**
-     * SAve an entity
+     * Save an entity
      * 
-     * @param \GibbonCms\Gibbon\Interfaces\Entity
+     * @param mixed
      * @return bool
      */
-    public function save(Entity $entity)
+    public function save($entity)
     {
-        return $this->filesystem->put(
-            $entity->getId() . '.md', 
+        $fresh = is_null($entity->getId());
+
+        if ($fresh) {
+            $reflection = new ReflectionObject($entity);
+            $property = $reflection->getProperty('id');
+            $property->setAccessible(true);
+            $property->setValue($entity, $this->generateId());
+        }
+
+        $success = $this->filesystem->put(
+            "{$entity->getId()}-{$entity->getSlug()}.md", 
             $this->factory->encode($entity)
         );
+
+        if ($success) $this->build();
+
+        return $success;
     }
 
     /**
@@ -100,20 +103,43 @@ class Repository implements RepositoryInterface
     {
         $files = $this->filesystem->listFiles();
 
-        $this->cache->place('_list', array_reduce($files, function($list, $file) {
-            if ($file['extension'] == 'md') $list[] = $file['filename'];
-            return $list;
-        }, []));
+        $list = [];
 
         foreach ($files as $file) {
             if ($file['extension'] == 'md') {
+                $parsedFilename = $this->parseFilename($file['filename']);
+
+                $list[] = $parsedFilename['id'];
+
                 $entity = $this->factory->make([
-                    'id' => $file['filename'],
-                    'data' => $this->filesystem->read($file['path'])
+                    'id'   => $parsedFilename['id'],
+                    'slug' => $parsedFilename['slug'],
+                    'data' => $this->filesystem->read($file['path']),
                 ]);
                 
                 $this->cache->place($entity->getId(), $entity);
             }
         }
+
+        $this->cache->place('_list', $list);
+    }
+
+    protected function parseFilename($filename)
+    {
+        $parts = explode('-', $filename, 2);
+
+        return [
+            'id'   => $parts[0],
+            'slug' => $parts[1],
+        ];
+    }
+
+    protected function generateId()
+    {
+        $list = $this->cache->get('_list');
+
+        $last = array_pop($list);
+
+        return intval($last) + 1;
     }
 }
