@@ -40,4 +40,16 @@ class Filesystem implements FilesystemContract
     {
         return $this->flysystem->read($path);
     }
+
+    /**
+     * Write a new file
+     * 
+     * @param string $filename
+     * @param string $contents
+     * @return bool
+     */
+    public function write($filename, $contents)
+    {
+        return $this->flysystem->write($filename, $contents);
+    }
 }

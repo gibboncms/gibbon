@@ -5,6 +5,7 @@ namespace tests\unit;
 use GibbonCms\Gibbon\Cache;
 use GibbonCms\Gibbon\Filesystem;
 use GibbonCms\Gibbon\Repository;
+use tests\stubs\Entity\Entity;
 use tests\stubs\Entity\EntityFactory;
 
 class RepositoryTest extends TestCase
@@ -45,5 +46,14 @@ class RepositoryTest extends TestCase
     {
         $this->assertCount(2, $this->repository->getAll());
         $this->assertContainsOnlyInstancesOf(EntityFactory::makes(), $this->repository->getAll());
+    }
+
+    /** @test */
+    function it_inserts_an_entity()
+    {
+        $entity = new Entity('20150429_stub', 'lorem ipsum dolor sit');
+        $this->assertTrue($this->repository->insert($entity));
+
+        @unlink($this->fixtures . '/entities/20150429_stub.md');
     }
 }

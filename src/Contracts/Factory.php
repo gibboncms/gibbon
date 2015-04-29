@@ -13,6 +13,14 @@ interface Factory
     public function make($data);
 
     /**
+     * Transform an entity to raw data
+     * 
+     * @param \GibbonCms\Gibbon\Contracts\Entity
+     * @return string
+     */
+    public function encode(Entity $entity);
+
+    /**
      * Return the classname of the entity this factory makes
      * 
      * @return string

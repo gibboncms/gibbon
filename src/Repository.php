@@ -2,8 +2,9 @@
 
 namespace GibbonCms\Gibbon;
 
-use GibbonCms\Gibbon\Contracts\Repository as RepositoryContract;
+use GibbonCms\Gibbon\Contracts\Entity;
 use GibbonCms\Gibbon\Contracts\Factory;
+use GibbonCms\Gibbon\Contracts\Repository as RepositoryContract;
 
 class Repository implements RepositoryContract
 {
@@ -77,6 +78,20 @@ class Repository implements RepositoryContract
     }
 
     /**
+     * Insert
+     * 
+     * @param \GibbonCms\Gibbon\Contracts\Entity
+     * @return bool
+     */
+    public function insert(Entity $entity)
+    {
+        return $this->filesystem->write(
+            $entity->getId() . '.md', 
+            $this->factory->encode($entity)
+        );
+    }
+
+    /**
      * Build the cache
      * 
      * @return void
@@ -86,7 +101,7 @@ class Repository implements RepositoryContract
         $files = $this->filesystem->listFiles();
 
         $this->cache->place('_list', array_reduce($files, function($list, $file) {
-            $list[] = $file['filename'];
+            if ($file['extension'] == 'md') $list[] = $file['filename'];
             return $list;
         }, []));
 

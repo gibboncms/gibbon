@@ -18,4 +18,13 @@ interface Filesystem
      * @return string
      */
     public function read($path);
+
+    /**
+     * Write a new file
+     * 
+     * @param string $filename
+     * @param string $contents
+     * @return bool
+     */
+    public function write($filename, $contents);
 }

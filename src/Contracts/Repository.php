@@ -25,4 +25,12 @@ interface Repository
      * @return \GibbonCms\System\Entity[]
      */
     public function getAll();
+
+    /**
+     * Insert
+     * 
+     * @param \GibbonCms\Gibbon\Contracts\Entity
+     * @return bool
+     */
+    public function insert(Entity $entity);
 }

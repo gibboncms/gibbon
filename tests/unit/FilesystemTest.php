@@ -11,6 +11,11 @@ class FilesystemTest extends TestCase
         $this->filesystem = new Filesystem($this->fixtures . '/entities/');
     }
 
+    function tearDown()
+    {
+        $this->filesystem = new Filesystem($this->fixtures . '/entities/');
+    }
+
     /** @test */
     function it_is_initializable()
     {
@@ -20,12 +25,20 @@ class FilesystemTest extends TestCase
     /** @test */
     function it_lists_files()
     {
-        $this->assertCount(2, $this->filesystem->listFiles());
+        $this->assertGreaterThan(1, $this->filesystem->listFiles());
     }
 
     /** @test */
     function it_reads_a_file()
     {
         $this->assertNotEmpty($this->filesystem->read('20150424_lorem-ipsum.md'));
+    }
+
+    /** @test */
+    function it_writes_a_file()
+    {
+        $this->assertTrue($this->filesystem->write('filesystemtest.md', 'filesystemtest'));
+
+        @unlink($this->fixtures . '/entities/filesystemtest.md');
     }
 }
