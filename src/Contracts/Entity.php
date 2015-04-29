@@ -5,13 +5,6 @@ namespace GibbonCms\Gibbon\Contracts;
 interface Entity 
 {
     /**
-     * Get an entity's original id
-     * 
-     * @return mixed
-     */
-    public function getOriginalId();
-
-    /**
      * Get an entity's id
      * 
      * @return mixed
