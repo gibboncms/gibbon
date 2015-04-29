@@ -20,11 +20,11 @@ interface Filesystem
     public function read($path);
 
     /**
-     * Write a new file
+     * Put (save) a file
      * 
      * @param string $filename
      * @param string $contents
      * @return bool
      */
-    public function write($filename, $contents);
+    public function put($filename, $contents);
 }

@@ -37,7 +37,7 @@ class FilesystemTest extends TestCase
     /** @test */
     function it_writes_a_file()
     {
-        $this->assertTrue($this->filesystem->write('filesystemtest.md', 'filesystemtest'));
+        $this->assertTrue($this->filesystem->put('filesystemtest.md', 'filesystemtest'));
 
         @unlink($this->fixtures . '/entities/filesystemtest.md');
     }

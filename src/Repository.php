@@ -78,14 +78,14 @@ class Repository implements RepositoryContract
     }
 
     /**
-     * Insert
+     * SAve an entity
      * 
      * @param \GibbonCms\Gibbon\Contracts\Entity
      * @return bool
      */
-    public function insert(Entity $entity)
+    public function save(Entity $entity)
     {
-        return $this->filesystem->write(
+        return $this->filesystem->put(
             $entity->getId() . '.md', 
             $this->factory->encode($entity)
         );

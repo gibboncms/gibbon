@@ -27,10 +27,10 @@ interface Repository
     public function getAll();
 
     /**
-     * Insert
+     * Save an entity
      * 
      * @param \GibbonCms\Gibbon\Contracts\Entity
      * @return bool
      */
-    public function insert(Entity $entity);
+    public function save(Entity $entity);
 }

@@ -49,10 +49,22 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function it_inserts_an_entity()
+    function it_saves_an_entity()
     {
         $entity = new Entity('20150429_stub', 'lorem ipsum dolor sit');
-        $this->assertTrue($this->repository->insert($entity));
+        $this->assertTrue($this->repository->save($entity));
+
+        @unlink($this->fixtures . '/entities/20150429_stub.md');
+    }
+
+    /** @test */
+    function it_updates_an_existing_entity()
+    {
+        $entity = new Entity('20150429_stub', 'lorem ipsum dolor sit');
+        $this->repository->save($entity);
+
+        $entity->setData('foo bar baz');
+        $this->assertTrue($this->repository->save($entity));
 
         @unlink($this->fixtures . '/entities/20150429_stub.md');
     }

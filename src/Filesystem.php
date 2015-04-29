@@ -42,14 +42,14 @@ class Filesystem implements FilesystemContract
     }
 
     /**
-     * Write a new file
+     * Put (save) a file
      * 
      * @param string $filename
      * @param string $contents
      * @return bool
      */
-    public function write($filename, $contents)
+    public function put($filename, $contents)
     {
-        return $this->flysystem->write($filename, $contents);
+        return $this->flysystem->put($filename, $contents);
     }
 }
