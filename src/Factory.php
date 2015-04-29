@@ -9,29 +9,6 @@ use ReflectionObject;
 abstract class Factory implements FactoryInterface
 {
     /**
-     * Transform raw data to an entity
-     * 
-     * @param mixed $data
-     * @return \GibbonCms\Gibbon\Interfaces\Entity
-     */
-    abstract public function make($data);
-
-    /**
-     * Transform an entity to raw data
-     * 
-     * @param \GibbonCms\Gibbon\Interfaces\Entity
-     * @return string
-     */
-    abstract public function encode(Entity $entity);
-
-    /**
-     * Return the classname of the entity this factory makes
-     * 
-     * @return string
-     */
-    abstract public static function makes();
-
-    /**
      * Return an entity prototype for this factory (an empty entity that hasn't been constructed).
      * All hail doctrine.
      * 

@@ -18,7 +18,7 @@ interface Factory
      * @param \GibbonCms\Gibbon\Interfaces\Entity
      * @return string
      */
-    public function encode(Entity $entity);
+    public function encode($entity);
 
     /**
      * Return the classname of the entity this factory makes

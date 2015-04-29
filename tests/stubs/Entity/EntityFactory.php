@@ -2,10 +2,10 @@
 
 namespace tests\stubs\Entity;
 
-use GibbonCms\Gibbon\Interfaces\Entity as EntityInterface;
-use GibbonCms\Gibbon\Interfaces\Factory;
+use GibbonCms\Gibbon\Factory;
+use GibbonCms\Gibbon\Interfaces\Factory as FactoryInterface;
 
-class EntityFactory implements Factory
+class EntityFactory extends Factory
 {
     /**
      * Transform raw data to an entity
@@ -15,7 +15,7 @@ class EntityFactory implements Factory
      */
     public function make($data)
     {
-        return new Entity($data['id'], $data['data']);
+        return $this->createAndFill($data);
     }
 
     /**
@@ -24,7 +24,7 @@ class EntityFactory implements Factory
      * @param \GibbonCms\Gibbon\Interfaces\Entity
      * @return string
      */
-    public function encode(EntityInterface $entity)
+    public function encode($entity)
     {
         return $entity->getData();
     }
