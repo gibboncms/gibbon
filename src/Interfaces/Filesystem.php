@@ -22,9 +22,17 @@ interface Filesystem
     /**
      * Put (save) a file
      * 
-     * @param string $filename
+     * @param string $path
      * @param string $contents
      * @return bool
      */
-    public function put($filename, $contents);
+    public function put($path, $contents);
+
+    /**
+     * Delete a file
+     * 
+     * @param string $path
+     * @return bool
+     */
+    public function delete($path);
 }

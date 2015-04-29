@@ -65,4 +65,12 @@ class RepositoryTest extends TestCase
 
         @unlink($this->fixtures . '/entities/' . $entity->getId() . '-stub.md');
     }
+
+    /** @test */
+    function it_deletes_an_entity()
+    {
+        $entity = new Entity('stub', 'lorem ipsum dolor sit');
+        $this->repository->save($entity);
+        $this->assertTrue($this->repository->delete($entity));
+    }
 }

@@ -41,4 +41,15 @@ class FilesystemTest extends TestCase
 
         @unlink($this->fixtures . '/entities/filesystemtest.md');
     }
+
+    /**
+     * @test
+     * @expectedException \League\Flysystem\FileNotFoundException
+     */
+    function it_deletes_a_file()
+    {
+        $this->filesystem->put('filesystemtest.md', 'filesystemtest');
+        $this->filesystem->delete('filesystemtest.md');
+        $this->filesystem->read('filesystemtest.md');
+    }
 }

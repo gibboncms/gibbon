@@ -26,4 +26,12 @@ interface Repository
      * @return bool
      */
     public function save($entity);
+
+    /**
+     * Delete an entity
+     * 
+     * @param mixed
+     * @return bool
+     */
+    public function delete($entity);
 }

@@ -95,6 +95,20 @@ class Repository implements RepositoryInterface
     }
 
     /**
+     * Delete an entity
+     * 
+     * @return bool
+     */
+    public function delete($entity)
+    {
+        $success = $this->filesystem->delete("{$entity->getId()}-{$entity->getSlug()}.md");
+
+        if ($success) $this->build();
+
+        return $success;
+    }
+
+    /**
      * Build the cache
      * 
      * @return void
@@ -124,6 +138,12 @@ class Repository implements RepositoryInterface
         $this->cache->place('_list', $list);
     }
 
+    /**
+     * Extract the id and slug from a filename
+     * 
+     * @param string $filename
+     * @return array
+     */
     protected function parseFilename($filename)
     {
         $parts = explode('-', $filename, 2);
@@ -134,6 +154,11 @@ class Repository implements RepositoryInterface
         ];
     }
 
+    /**
+     * Generate an id for a new entity
+     * 
+     * @return int
+     */
     protected function generateId()
     {
         $list = $this->cache->get('_list');

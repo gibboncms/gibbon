@@ -44,12 +44,23 @@ class Filesystem implements FilesystemInterface
     /**
      * Put (save) a file
      * 
-     * @param string $filename
+     * @param string $path
      * @param string $contents
      * @return bool
      */
-    public function put($filename, $contents)
+    public function put($path, $contents)
     {
-        return $this->flysystem->put($filename, $contents);
+        return $this->flysystem->put($path, $contents);
+    }
+
+    /**
+     * Delete a file
+     * 
+     * @param string $path
+     * @return bool
+     */
+    public function delete($path)
+    {
+        return $this->flysystem->delete($path);
     }
 }
