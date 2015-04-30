@@ -130,22 +130,32 @@ class Repository implements RepositoryInterface
         $list = [];
 
         foreach ($files as $file) {
-            if ($file['extension'] == 'md') {
-                $parsedFilename = $this->parseFilename($file['filename']);
-
-                $list[] = $parsedFilename['id'];
-
-                $entity = $this->factory->make([
-                    'id'   => $parsedFilename['id'],
-                    'slug' => $parsedFilename['slug'],
-                    'data' => $this->filesystem->read($file['path']),
-                ]);
-                
-                $this->cache->place($entity->getId(), $entity);
-            }
+            $entity = $this->parseFile($file);
+            if (!is_null($entity)) $list[] = $entity->getId();
         }
 
         $this->cache->place('_list', $list);
+    }
+
+    /**
+     * @param array $file
+     * @return mixed|null
+     */
+    protected function parseFile($file)
+    {
+        if ($file['extension'] == 'md') {
+            $parsedFilename = $this->parseFilename($file['filename']);
+
+            $entity = $this->factory->make([
+                'id'   => $parsedFilename['id'],
+                'slug' => $parsedFilename['slug'],
+                'data' => $this->filesystem->read($file['path']),
+            ]);
+            
+            $this->cache->place($entity->getId(), $entity);
+
+            return $entity;
+        }
     }
 
     /**
