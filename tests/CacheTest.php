@@ -18,10 +18,10 @@ class CacheTest extends TestCase
     }
 
     /** @test */
-    function it_places_and_gets_a_value()
+    function it_puts_and_gets_a_value()
     {
         $cache = $this->cache;
-        $cache->place('foo', 'bar');
+        $cache->put('foo', 'bar');
 
         $this->assertEquals('bar', $cache->get('foo'));
     }
@@ -30,7 +30,7 @@ class CacheTest extends TestCase
     function it_can_flush()
     {
         $cache = $this->cache;
-        $cache->place('foo', 'bar');
+        $cache->put('foo', 'bar');
         $cache->flush();
 
         $this->assertNotEquals('bar', $cache->get('foo'));

@@ -134,7 +134,7 @@ class Repository implements RepositoryInterface
             if (!is_null($entity)) $list[] = $entity->getId();
         }
 
-        $this->cache->place('_list', $list);
+        $this->cache->put('_list', $list);
     }
 
     /**
@@ -152,7 +152,7 @@ class Repository implements RepositoryInterface
                 'data' => $this->filesystem->read($file['path']),
             ]);
             
-            $this->cache->place($entity->getId(), $entity);
+            $this->cache->put($entity->getId(), $entity);
 
             return $entity;
         }

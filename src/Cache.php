@@ -2,29 +2,54 @@
 
 namespace GibbonCms\Gibbon;
 
-use Stash\Driver\FileSystem as Driver;
-use Stash\Pool;
 use GibbonCms\Gibbon\Interfaces\Cache as CacheInterface;
 
 class Cache implements CacheInterface
 {
     /**
-     * The stash pool
+     * The cache's filename
      * 
-     * @var \Stash\Pool
+     * @var string
      */
-    private $pool;
+    protected $file;
+
+    /**
+     * The cache data
+     * 
+     * @var array
+     */
+    protected $data;
 
     /**
      * Constructor method
      * 
-     * @param string $path
+     * @param string $directory
      */
-    public function __construct($path)
+    public function __construct($file)
     {
-        $driver = new Driver;
-        $driver->setOptions(['path' => $path]);
-        $this->pool = new Pool($driver);
+        $this->file = $file;
+
+        $this->data = [];
+
+        if (file_exists($this->file)) {
+            // Try to unserialize the existing cache, if it's corrupted, it's lost, let it go.
+            try {
+                $this->data = unserialize(file_get_contents($this->file));
+                return;
+            } catch (\Exception $e) { }
+        }
+        
+        $this->save();
+    }
+
+    /**
+     * Get all data from the cache
+     * 
+     * @return array
+     */
+    public function all()
+    {
+        return $this->data;
     }
 
     /**
@@ -35,7 +60,7 @@ class Cache implements CacheInterface
      */
     public function get($key)
     {
-        return $this->pool->getItem($key)->get();
+        return isset($this->data[$key]) ? $this->data[$key] : null;
     }
 
     /**
@@ -45,9 +70,10 @@ class Cache implements CacheInterface
      * @param mixed $value
      * @return void
      */
-    public function place($key, $value)
+    public function put($key, $value)
     {
-        $this->pool->getItem($key)->set($value);
+        $this->data[$key] = $value;
+        $this->save();
     }
 
     /**
@@ -57,6 +83,17 @@ class Cache implements CacheInterface
      */
     public function flush()
     {
-        $this->pool->flush();
+        $this->data = [];
+        $this->save();
+    }
+
+    /**
+     * Persist the cache data
+     * 
+     * @return bool
+     */
+    protected function save()
+    {
+        return file_put_contents($this->file, serialize($this->data));
     }
 }

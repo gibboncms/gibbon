@@ -5,6 +5,13 @@ namespace GibbonCms\Gibbon\Interfaces;
 interface Cache
 {
     /**
+     * Get all data from the cache
+     * 
+     * @return array
+     */
+    public function all();
+
+    /**
      * Get an object from the cache
      * 
      * @param string $key
@@ -19,7 +26,7 @@ interface Cache
      * @param mixed $value
      * @return void
      */
-    public function place($key, $value);
+    public function put($key, $value);
 
     /**
      * Empty the cache
