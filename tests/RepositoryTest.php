@@ -35,7 +35,6 @@ class RepositoryTest extends TestCase
     }
 
     /** 
-     * @group current
      * @test
      */
     function it_returns_all_entities()
