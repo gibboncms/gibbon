@@ -61,10 +61,7 @@ class Repository implements RepositoryInterface
      */
     public function getAll()
     {
-        return array_reduce($this->getList(), function($carry, $id) {
-            $carry[] = $this->find($id);
-            return $carry;
-        }, []);
+        return array_values($this->cache->all());
     }
 
     /**
@@ -74,7 +71,7 @@ class Repository implements RepositoryInterface
      */
     public function getList()
     {
-        return $this->cache->get('_list');
+        return array_keys($this->cache->all());
     }
 
     /**
@@ -127,14 +124,13 @@ class Repository implements RepositoryInterface
     {
         $files = $this->filesystem->listFiles();
 
-        $list = [];
+        $this->cache->startTransaction();
 
         foreach ($files as $file) {
             $entity = $this->parseFile($file);
-            if (!is_null($entity)) $list[] = $entity->getId();
         }
 
-        $this->cache->put('_list', $list);
+        $this->cache->commitTransaction();
     }
 
     /**

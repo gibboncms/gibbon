@@ -21,6 +21,13 @@ class Cache implements CacheInterface
     protected $data;
 
     /**
+     * Determines whether the cache is currently transacting
+     * 
+     * @var bool
+     */
+    protected $transacting = false;
+
+    /**
      * Constructor method
      * 
      * @param string $directory
@@ -30,16 +37,6 @@ class Cache implements CacheInterface
         $this->file = $file;
 
         $this->data = [];
-
-        if (file_exists($this->file)) {
-            // Try to unserialize the existing cache, if it's corrupted, it's lost, let it go.
-            try {
-                $this->data = unserialize(file_get_contents($this->file));
-                return;
-            } catch (\Exception $e) { }
-        }
-        
-        $this->save();
     }
 
     /**
@@ -88,12 +85,67 @@ class Cache implements CacheInterface
     }
 
     /**
+     * Start a cache transaction
+     * 
+     * @return void
+     */
+    public function startTransaction()
+    {
+        $this->transacting = true;
+    }
+
+    /**
+     * Commit a cache transaction
+     * 
+     * @return bool
+     */
+    public function commitTransaction()
+    {
+        $this->transacting = false;
+        $this->save();
+    }
+
+    /**
+     * Cancel a cache transaction
+     * 
+     * @return bool
+     */
+    public function cancelTransaction()
+    {
+        $this->transacting = false;
+        $this->rebuild();
+    }
+
+    /**
      * Persist the cache data
      * 
      * @return bool
      */
     protected function save()
     {
+        if ($this->transacting) {
+            return false;
+        }
+
         return file_put_contents($this->file, serialize($this->data));
+    }
+
+    /**
+     * Try to unserialize the existing cache, if it's corrupted, it's lost, let it go.
+     * 
+     * @return bool
+     */
+    protected function rebuild()
+    {
+        if (file_exists($this->file)) {
+            try {
+                $this->data = unserialize(file_get_contents($this->file));
+                return true;
+            } catch (\Exception $e) { }
+        }
+
+        $this->data = [];
+        $this->save();
+        return false;
     }
 }

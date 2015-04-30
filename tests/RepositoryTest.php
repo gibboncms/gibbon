@@ -34,7 +34,10 @@ class RepositoryTest extends TestCase
         $this->assertEquals(1, $this->repository->find(1)->getId());
     }
 
-    /** @test */
+    /** 
+     * @group current
+     * @test
+     */
     function it_returns_all_entities()
     {
         $this->assertCount(2, $this->repository->getAll());

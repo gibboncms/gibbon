@@ -34,4 +34,25 @@ interface Cache
      * @return void
      */
     public function flush();
+
+    /**
+     * Start a cache transaction
+     * 
+     * @return void
+     */
+    public function startTransaction();
+
+    /**
+     * Commit a cache transaction
+     * 
+     * @return bool
+     */
+    public function commitTransaction();
+
+    /**
+     * Cancel a cache transaction
+     * 
+     * @return bool
+     */
+    public function cancelTransaction();
 }
