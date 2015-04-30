@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\unit;
+namespace GibbonCms\Gibbon\Tests;
 
 use GibbonCms\Gibbon\Cache;
 

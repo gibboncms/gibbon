@@ -13,8 +13,12 @@
     },
     "autoload": {
         "psr-4": {
-            "GibbonCms\\Gibbon\\": "src/",
-            "tests\\": "tests/"
+            "GibbonCms\\Gibbon\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GibbonCms\\Gibbon\\Tests\\": "tests/" 
         }
     },
     "require": {

@@ -3,7 +3,7 @@
 <phpunit colors="true">
     <testsuites>
         <testsuite name="Gibbon unit tests">
-            <directory suffix="Test.php">./tests/unit</directory>
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

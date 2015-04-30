@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\unit;
+namespace GibbonCms\Gibbon\Tests;
 
 use PHPUnit_Framework_TestCase;
 
@@ -13,6 +13,6 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        $this->fixtures = __DIR__ . '/../fixtures';
+        $this->fixtures = __DIR__ . '/fixtures';
     }
 }

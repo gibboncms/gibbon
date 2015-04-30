@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\stubs\Entity;
+namespace GibbonCms\Gibbon\Tests\Stubs;
 
 use GibbonCms\Gibbon\Factory;
 use GibbonCms\Gibbon\Interfaces\Factory as FactoryInterface;

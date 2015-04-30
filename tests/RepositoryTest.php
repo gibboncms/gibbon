@@ -1,12 +1,12 @@
 <?php
 
-namespace tests\unit;
+namespace GibbonCms\Gibbon\Tests;
 
 use GibbonCms\Gibbon\Cache;
 use GibbonCms\Gibbon\Filesystem;
 use GibbonCms\Gibbon\Repository;
-use tests\stubs\Entity\Entity;
-use tests\stubs\Entity\EntityFactory;
+use GibbonCms\Gibbon\Tests\Stubs\Entity;
+use GibbonCms\Gibbon\Tests\Stubs\EntityFactory;
 
 class RepositoryTest extends TestCase
 {
