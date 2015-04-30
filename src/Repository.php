@@ -61,10 +61,20 @@ class Repository implements RepositoryInterface
      */
     public function getAll()
     {
-        return array_reduce($this->cache->get('_list'), function($carry, $id) {
+        return array_reduce($this->getList(), function($carry, $id) {
             $carry[] = $this->find($id);
             return $carry;
         }, []);
+    }
+
+    /**
+     * Return a list of all ids
+     * 
+     * @return array
+     */
+    public function getList()
+    {
+        return $this->cache->get('_list');
     }
 
     /**
@@ -161,7 +171,7 @@ class Repository implements RepositoryInterface
      */
     protected function generateId()
     {
-        $list = $this->cache->get('_list');
+        $list = $this->getList();
 
         $last = array_pop($list);
 
