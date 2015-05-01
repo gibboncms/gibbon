@@ -6,7 +6,7 @@ use GibbonCms\Gibbon\Interfaces\Factory;
 use GibbonCms\Gibbon\Interfaces\Repository as RepositoryInterface;
 use ReflectionObject;
 
-class Repository implements RepositoryInterface
+class EntityRepository implements RepositoryInterface
 {
     /**
      * The filesystem is used to read and write files

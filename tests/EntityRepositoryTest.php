@@ -4,15 +4,15 @@ namespace GibbonCms\Gibbon\Tests;
 
 use GibbonCms\Gibbon\Cache;
 use GibbonCms\Gibbon\Filesystem;
-use GibbonCms\Gibbon\Repository;
+use GibbonCms\Gibbon\EntityRepository;
 use GibbonCms\Gibbon\Tests\Stubs\Entity;
 use GibbonCms\Gibbon\Tests\Stubs\EntityFactory;
 
-class RepositoryTest extends TestCase
+class EntityRepositoryTest extends TestCase
 {
     function setUp()
     {
-        $this->repository = new Repository(
+        $this->repository = new EntityRepository(
             new Filesystem($this->fixtures . '/entities/'),
             new Cache($this->fixtures . '/entities/.cache'),
             new EntityFactory
@@ -24,7 +24,7 @@ class RepositoryTest extends TestCase
     /** @test */
     function it_is_initializable()
     {
-        $this->assertInstanceOf(Repository::class, $this->repository);
+        $this->assertInstanceOf(EntityRepository::class, $this->repository);
     }
 
     /** @test */
