@@ -82,7 +82,7 @@ class EntityRepository implements RepositoryInterface
      */
     public function save($entity)
     {
-        $fresh = is_null($entity->id);
+        $fresh = is_null($entity->getId());
 
         if ($fresh) {
             $reflection = new ReflectionObject($entity);
@@ -92,12 +92,12 @@ class EntityRepository implements RepositoryInterface
         }
 
         $success = $this->filesystem->put(
-            "{$entity->id}-{$entity->slug}.md", 
+            "{$entity->getId()}-{$entity->getSlug()}.md", 
             $this->factory->encode($entity)
         );
 
         if ($success) {
-            $this->cache->put($entity->id, $entity);
+            $this->cache->put($entity->getId(), $entity);
             $this->cache->persist();
         }
 
@@ -111,10 +111,10 @@ class EntityRepository implements RepositoryInterface
      */
     public function delete($entity)
     {
-        $success = $this->filesystem->delete("{$entity->id}-{$entity->slug}.md");
+        $success = $this->filesystem->delete("{$entity->getId()}-{$entity->getSlug()}.md");
 
         if ($success) {
-            $this->cache->forget($entity->id);
+            $this->cache->forget($entity->getId());
             $this->cache->persist();
         }
 
@@ -152,7 +152,7 @@ class EntityRepository implements RepositoryInterface
                 'data' => $this->filesystem->read($file['path']),
             ]);
             
-            $this->cache->put($entity->id, $entity);
+            $this->cache->put($entity->getId(), $entity);
 
             return $entity;
         }

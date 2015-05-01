@@ -31,7 +31,7 @@ class EntityRepositoryTest extends TestCase
     function it_returns_an_entity()
     {
         $this->assertInstanceOf(EntityFactory::makes(), $this->repository->find(1));
-        $this->assertEquals(1, $this->repository->find(1)->id);
+        $this->assertEquals(1, $this->repository->find(1)->getId());
     }
 
     /** 
@@ -49,9 +49,9 @@ class EntityRepositoryTest extends TestCase
         $entity = new Entity('stub', 'lorem ipsum dolor sit');
         $this->assertTrue($this->repository->save($entity));
 
-        $this->assertEquals($entity->id, $this->repository->find($entity->id)->id);
+        $this->assertEquals($entity->getId(), $this->repository->find($entity->getId())->getId());
      
-        @unlink($this->fixtures . '/entities/' . $entity->id . '-stub.md');
+        @unlink($this->fixtures . '/entities/' . $entity->getId() . '-stub.md');
     }
 
     /** @test */
@@ -60,12 +60,12 @@ class EntityRepositoryTest extends TestCase
         $entity = new Entity('stub', 'lorem ipsum dolor sit');
         $this->repository->save($entity);
 
-        $entity->data = 'foo bar baz';
+        $entity->setData('foo bar baz');
         $this->assertTrue($this->repository->save($entity));
 
-        $this->assertEquals('foo bar baz', $this->repository->find($entity->id)->data);
+        $this->assertEquals('foo bar baz', $this->repository->find($entity->getId())->getData());
 
-        @unlink($this->fixtures . '/entities/' . $entity->id . '-stub.md');
+        @unlink($this->fixtures . '/entities/' . $entity->getId() . '-stub.md');
     }
 
     /** @test */

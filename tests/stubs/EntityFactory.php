@@ -26,7 +26,7 @@ class EntityFactory extends Factory
      */
     public function encode($entity)
     {
-        return $entity->data;
+        return $entity->getData();
     }
 
     /**
