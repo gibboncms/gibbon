@@ -75,4 +75,17 @@ class EntityRepositoryTest extends TestCase
         $this->repository->save($entity);
         $this->assertTrue($this->repository->delete($entity));
     }
+
+    /** @test */
+    function it_can_copy_an_entity()
+    {
+        $entity = $this->repository->find(1);
+        $copy = $this->repository->copy($entity);
+        $this->assertEquals(null, $copy->getId());
+
+        $this->repository->save($copy);
+        $this->assertEquals(3, $copy->getId());
+        
+        @unlink($this->fixtures . '/entities/' . $copy->getId() . '-lorem-ipsum.md');
+    }
 }

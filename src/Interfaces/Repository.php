@@ -34,4 +34,12 @@ interface Repository
      * @return bool
      */
     public function delete($entity);
+
+    /**
+     * Copy an entity
+     * 
+     * @param mixed $entity
+     * @return mixed
+     */
+    public function copy($entity);
 }

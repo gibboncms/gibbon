@@ -85,10 +85,7 @@ class EntityRepository implements RepositoryInterface
         $fresh = is_null($entity->getId());
 
         if ($fresh) {
-            $reflection = new ReflectionObject($entity);
-            $property = $reflection->getProperty('id');
-            $property->setAccessible(true);
-            $property->setValue($entity, $this->generateId());
+            $this->setNewId($entity, $this->generateId());
         }
 
         $success = $this->filesystem->put(
@@ -119,6 +116,20 @@ class EntityRepository implements RepositoryInterface
         }
 
         return $success;
+    }
+
+    /**
+     * Copy an entity
+     * 
+     * @param mixed $entity
+     * @return mixed
+     */
+    public function copy($entity)
+    {
+        $copy = clone $entity;
+        $this->setNewId($copy);
+
+        return $copy;
     }
 
     /**
@@ -186,5 +197,22 @@ class EntityRepository implements RepositoryInterface
         $last = array_pop($list);
 
         return intval($last) + 1;
+    }
+
+    /**
+     * Set a new, valid id on an entity
+     * 
+     * @param mixed $entity
+     * @param mixed $id
+     * @return mixed
+     */
+    protected function setNewId($entity, $id = null)
+    {
+        $reflection = new ReflectionObject($entity);
+        $property = $reflection->getProperty('id');
+        $property->setAccessible(true);
+        $property->setValue($entity, $id);
+
+        return $entity;
     }
 }
