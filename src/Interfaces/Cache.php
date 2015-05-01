@@ -29,30 +29,24 @@ interface Cache
     public function put($key, $value);
 
     /**
+     * Forget an object in the cache
+     * 
+     * @param string $key
+     * @return void
+     */
+    public function forget($key);
+
+    /**
      * Empty the cache
      * 
      * @return void
      */
-    public function flush();
+    public function clear();
 
     /**
-     * Start a cache transaction
+     * Persist the cache
      * 
      * @return void
      */
-    public function startTransaction();
-
-    /**
-     * Commit a cache transaction
-     * 
-     * @return bool
-     */
-    public function commitTransaction();
-
-    /**
-     * Cancel a cache transaction
-     * 
-     * @return bool
-     */
-    public function cancelTransaction();
+    public function persist();
 }

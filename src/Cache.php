@@ -21,13 +21,6 @@ class Cache implements CacheInterface
     protected $data;
 
     /**
-     * Determines whether the cache is currently transacting
-     * 
-     * @var bool
-     */
-    protected $transacting = false;
-
-    /**
      * Constructor method
      * 
      * @param string $directory
@@ -70,7 +63,17 @@ class Cache implements CacheInterface
     public function put($key, $value)
     {
         $this->data[$key] = $value;
-        $this->save();
+    }
+
+    /**
+     * Forget an object in the cache
+     * 
+     * @param string $key
+     * @return void
+     */
+    public function forget($key)
+    {
+        unset($this->data[$key]);
     }
 
     /**
@@ -78,42 +81,9 @@ class Cache implements CacheInterface
      * 
      * @return void
      */
-    public function flush()
+    public function clear()
     {
         $this->data = [];
-        $this->save();
-    }
-
-    /**
-     * Start a cache transaction
-     * 
-     * @return void
-     */
-    public function startTransaction()
-    {
-        $this->transacting = true;
-    }
-
-    /**
-     * Commit a cache transaction
-     * 
-     * @return bool
-     */
-    public function commitTransaction()
-    {
-        $this->transacting = false;
-        $this->save();
-    }
-
-    /**
-     * Cancel a cache transaction
-     * 
-     * @return bool
-     */
-    public function cancelTransaction()
-    {
-        $this->transacting = false;
-        $this->rebuild();
     }
 
     /**
@@ -121,12 +91,8 @@ class Cache implements CacheInterface
      * 
      * @return bool
      */
-    protected function save()
+    public function persist()
     {
-        if ($this->transacting) {
-            return false;
-        }
-
         return file_put_contents($this->file, serialize($this->data));
     }
 

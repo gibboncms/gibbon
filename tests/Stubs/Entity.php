@@ -9,7 +9,7 @@ class Entity extends BaseEntity
     /**
      * @var string
      */
-    protected $data;
+    public $data;
     
     /**
      * @param string $id
@@ -19,23 +19,6 @@ class Entity extends BaseEntity
     {
         parent::__construct($slug);
 
-        $this->data = $data;
-    }
-
-    /**
-     * @return string
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param string $data
-     * @return void
-     */
-    public function setData($data)
-    {
         $this->data = $data;
     }
 }

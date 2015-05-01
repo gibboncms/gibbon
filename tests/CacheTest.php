@@ -27,11 +27,11 @@ class CacheTest extends TestCase
     }
 
     /** @test */
-    function it_can_flush()
+    function it_can_clear()
     {
         $cache = $this->cache;
         $cache->put('foo', 'bar');
-        $cache->flush();
+        $cache->clear();
 
         $this->assertNotEquals('bar', $cache->get('foo'));
     }

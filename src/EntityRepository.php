@@ -82,7 +82,7 @@ class EntityRepository implements RepositoryInterface
      */
     public function save($entity)
     {
-        $fresh = is_null($entity->getId());
+        $fresh = is_null($entity->id);
 
         if ($fresh) {
             $reflection = new ReflectionObject($entity);
@@ -92,11 +92,14 @@ class EntityRepository implements RepositoryInterface
         }
 
         $success = $this->filesystem->put(
-            "{$entity->getId()}-{$entity->getSlug()}.md", 
+            "{$entity->id}-{$entity->slug}.md", 
             $this->factory->encode($entity)
         );
 
-        if ($success) $this->build();
+        if ($success) {
+            $this->cache->put($entity->id, $entity);
+            $this->cache->persist();
+        }
 
         return $success;
     }
@@ -108,9 +111,12 @@ class EntityRepository implements RepositoryInterface
      */
     public function delete($entity)
     {
-        $success = $this->filesystem->delete("{$entity->getId()}-{$entity->getSlug()}.md");
+        $success = $this->filesystem->delete("{$entity->id}-{$entity->slug}.md");
 
-        if ($success) $this->build();
+        if ($success) {
+            $this->cache->forget($entity->id);
+            $this->cache->persist();
+        }
 
         return $success;
     }
@@ -120,17 +126,15 @@ class EntityRepository implements RepositoryInterface
      * 
      * @return void
      */
-    public function build()
+    public function buildCache()
     {
         $files = $this->filesystem->listFiles();
-
-        $this->cache->startTransaction();
 
         foreach ($files as $file) {
             $entity = $this->parseFile($file);
         }
-
-        $this->cache->commitTransaction();
+        
+        $this->cache->persist();
     }
 
     /**
@@ -148,7 +152,7 @@ class EntityRepository implements RepositoryInterface
                 'data' => $this->filesystem->read($file['path']),
             ]);
             
-            $this->cache->put($entity->getId(), $entity);
+            $this->cache->put($entity->id, $entity);
 
             return $entity;
         }

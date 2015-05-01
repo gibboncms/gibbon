@@ -20,13 +20,6 @@ interface Repository
     public function getAll();
 
     /**
-     * Return a list of all ids
-     * 
-     * @return array
-     */
-    public function getList();
-
-    /**
      * Save an entity
      * 
      * @param mixed
