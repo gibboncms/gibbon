@@ -4,8 +4,6 @@ namespace GibbonCms\Gibbon;
 
 use GibbonCms\Gibbon\Interfaces\Repository as RepositoryInterface;
 use Illuminate\Support\Arr;
-use Symfony\Component\Yaml\Dumper as YamlDumper;
-use Symfony\Component\Yaml\Parser as YamlParser;
 
 class ValueRepository implements RepositoryInterface
 {
@@ -21,9 +19,6 @@ class ValueRepository implements RepositoryInterface
     {
         $this->filesystem = $filesystem;
         $this->filename = $filename;
-
-        $this->yaml = new YamlParser;
-        $this->yamlDumper = new YamlDumper;
 
         $this->parseFile();
     }
@@ -71,7 +66,7 @@ class ValueRepository implements RepositoryInterface
      */
     public function save()
     {
-        $encoded = $this->yamlDumper->dump($this->values, 8);
+        $encoded = json_encode($this->values, JSON_PRETTY_PRINT);
 
         return $this->filesystem->put($this->filename, $encoded);
     }
@@ -83,7 +78,7 @@ class ValueRepository implements RepositoryInterface
      */
     protected function parseFile()
     {
-        $this->values = $this->yaml->parse($this->getFile());
+        $this->values = json_decode($this->getFile(), true);
     }
 
     /**

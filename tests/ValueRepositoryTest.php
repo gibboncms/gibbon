@@ -9,7 +9,7 @@ class ValueRepositoryTest extends TestCase
 {
     function setUp()
     {
-        $this->repository = new ValueRepository(new Filesystem($this->fixtures), 'values.yml');
+        $this->repository = new ValueRepository(new Filesystem($this->fixtures), 'values.json');
     }
 
     /** @test */
