@@ -18,28 +18,4 @@ interface Repository
      * @return mixed[]
      */
     public function getAll();
-
-    /**
-     * Save an entity
-     * 
-     * @param mixed
-     * @return bool
-     */
-    public function save($entity);
-
-    /**
-     * Delete an entity
-     * 
-     * @param mixed
-     * @return bool
-     */
-    public function delete($entity);
-
-    /**
-     * Copy an entity
-     * 
-     * @param mixed $entity
-     * @return mixed
-     */
-    public function copy($entity);
 }

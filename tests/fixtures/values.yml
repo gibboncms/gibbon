@@ -1,0 +1,10 @@
+url: example.com
+contact:
+    email: sebastian@example.com
+    phone:
+        home: '123456789'
+        mobile: '123456780'
+users:
+    -
+        email: sebastian@example.com
+        password: $2y$10$C.uob2zqy/GZyGdbQBefeuAlLe0x2OmHcRuHgmu.xMRISS48Pv0ne

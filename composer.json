@@ -22,6 +22,8 @@
         }
     },
     "require": {
-        "league/flysystem": "~1.0"
+        "league/flysystem": "~1.0",
+        "symfony/yaml": "~2.6",
+        "illuminate/support": "~5.0"
     }
 }

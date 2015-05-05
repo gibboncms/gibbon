@@ -2,11 +2,11 @@
 
 namespace GibbonCms\Gibbon;
 
-use GibbonCms\Gibbon\Interfaces\Factory;
-use GibbonCms\Gibbon\Interfaces\Repository as RepositoryInterface;
+use GibbonCms\Gibbon\Interfaces\Factory as FactoryInterface;
+use GibbonCms\Gibbon\Interfaces\EntityRepository as EntityRepositoryInterface;
 use ReflectionObject;
 
-class EntityRepository implements RepositoryInterface
+class EntityRepository implements EntityRepositoryInterface
 {
     /**
      * The filesystem is used to read and write files
@@ -25,7 +25,7 @@ class EntityRepository implements RepositoryInterface
     /**
      * The entity factory transforms raw data to a usable entity
      * 
-     * @var \GibbonCms\Gibbon\Interfaces\Factory
+     * @var \GibbonCms\Gibbon\Interfaces\FactoryInterface
      */
     private $factory;
 
@@ -34,9 +34,9 @@ class EntityRepository implements RepositoryInterface
      * 
      * @param \GibbonCms\Gibbon\Interfaces\Filesystem $filesystem
      * @param \GibbonCms\Gibbon\Interfaces\Cache $cache
-     * @param \GibbonCms\Gibbon\Interfaces\Factory $factory
+     * @param \GibbonCms\Gibbon\Interfaces\FactoryInterface $factory
      */
-    public function __construct(Filesystem $filesystem, Cache $cache, Factory $factory)
+    public function __construct(Filesystem $filesystem, Cache $cache, FactoryInterface $factory)
     {
         $this->filesystem = $filesystem;
         $this->factory = $factory;
