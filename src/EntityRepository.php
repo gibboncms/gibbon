@@ -13,21 +13,21 @@ class EntityRepository implements EntityRepositoryInterface
      * 
      * @var \GibbonCms\Gibbon\Interfaces\Filesystem
      */
-    private $filesystem;
+    protected $filesystem;
 
     /**
      * We're using a cache because file io is slow
      * 
      * @var \GibbonCms\Gibbon\Interfaces\Cache
      */
-    private $cache;
+    protected $cache;
 
     /**
      * The entity factory transforms raw data to a usable entity
      * 
      * @var \GibbonCms\Gibbon\Interfaces\FactoryInterface
      */
-    private $factory;
+    protected $factory;
 
     /**
      * Constructor method injects all dependencies
@@ -41,6 +41,8 @@ class EntityRepository implements EntityRepositoryInterface
         $this->filesystem = $filesystem;
         $this->factory = $factory;
         $this->cache = $cache;
+
+        $this->cache->rebuild();
     }
 
     /**
@@ -140,6 +142,8 @@ class EntityRepository implements EntityRepositoryInterface
     public function buildCache()
     {
         $files = $this->filesystem->listFiles();
+
+        $this->cache->clear();
 
         foreach ($files as $file) {
             $entity = $this->parseFile($file);

@@ -101,7 +101,7 @@ class Cache implements CacheInterface
      * 
      * @return bool
      */
-    protected function rebuild()
+    public function rebuild()
     {
         if (file_exists($this->file)) {
             try {
@@ -111,7 +111,7 @@ class Cache implements CacheInterface
         }
 
         $this->data = [];
-        $this->save();
+        $this->persist();
         return false;
     }
 }
