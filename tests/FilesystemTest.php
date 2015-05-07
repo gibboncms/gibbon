@@ -2,24 +2,24 @@
 
 namespace GibbonCms\Gibbon\Tests;
 
-use GibbonCms\Gibbon\Filesystem;
+use GibbonCms\Gibbon\Filesystems\PlainFilesystem;
 
 class FilesystemTest extends TestCase
 {
     function setUp()
     {
-        $this->filesystem = new Filesystem($this->fixtures . '/entities/');
+        $this->filesystem = new PlainFilesystem($this->fixtures . '/entities/');
     }
 
     function tearDown()
     {
-        $this->filesystem = new Filesystem($this->fixtures . '/entities/');
+        $this->filesystem = new PlainFilesystem($this->fixtures . '/entities/');
     }
 
     /** @test */
     function it_is_initializable()
     {
-        $this->assertInstanceOf(Filesystem::class, $this->filesystem);
+        $this->assertInstanceOf(PlainFilesystem::class, $this->filesystem);
     }
 
     /** @test */
@@ -31,7 +31,7 @@ class FilesystemTest extends TestCase
     /** @test */
     function it_reads_a_file()
     {
-        $this->assertNotEmpty($this->filesystem->read('1-lorem-ipsum.md'));
+        $this->assertNotEmpty($this->filesystem->read('1.md'));
     }
 
     /** @test */

@@ -2,11 +2,13 @@
 
 namespace GibbonCms\Gibbon\Tests\Stubs;
 
-use GibbonCms\Gibbon\Factory;
-use GibbonCms\Gibbon\Interfaces\Factory as FactoryInterface;
+use GibbonCms\Gibbon\Factories\Factory;
+use GibbonCms\Gibbon\Factories\FactoryHelpers;
 
-class EntityFactory extends Factory
+class EntityFactory implements Factory
 {
+    use FactoryHelpers;
+
     /**
      * Transform raw data to an entity
      * 
@@ -26,7 +28,7 @@ class EntityFactory extends Factory
      */
     public function encode($entity)
     {
-        return $entity->getData();
+        return $entity->data;
     }
 
     /**

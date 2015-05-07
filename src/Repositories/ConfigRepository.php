@@ -1,14 +1,29 @@
 <?php
 
-namespace GibbonCms\Gibbon;
+namespace GibbonCms\Gibbon\Repositories;
 
-use GibbonCms\Gibbon\Interfaces\Repository as RepositoryInterface;
+use GibbonCms\Gibbon\Filesystems\Filesystem;
 use Illuminate\Support\Arr;
 
-class ValueRepository implements RepositoryInterface
+class ConfigRepository implements Repository
 {
+    /**
+     * The filesystem is used to read and write files
+     * 
+     * @var \GibbonCms\Gibbon\Filesystems\Filesystem
+     */
     protected $filesystem;
+
+    /**
+     * File where the values are saved
+     * 
+     * @var string
+     */
     protected $filename;
+
+    /**
+     * In memory cache containing the values
+     */
     protected $values;
 
     /**

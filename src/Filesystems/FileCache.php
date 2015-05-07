@@ -1,10 +1,8 @@
 <?php
 
-namespace GibbonCms\Gibbon;
+namespace GibbonCms\Gibbon\Filesystems;
 
-use GibbonCms\Gibbon\Interfaces\Cache as CacheInterface;
-
-class Cache implements CacheInterface
+class FileCache implements Cache
 {
     /**
      * The cache's filename

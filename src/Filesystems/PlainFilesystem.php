@@ -1,13 +1,12 @@
 <?php
 
-namespace GibbonCms\Gibbon;
+namespace GibbonCms\Gibbon\Filesystems;
 
-use GibbonCms\Gibbon\Interfaces\Filesystem as FilesystemInterface;
 use League\Flysystem\Adapter\Local as FlysystemAdapter;
 use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\Plugin\ListFiles;
 
-class Filesystem implements FilesystemInterface
+class PlainFilesystem implements Filesystem
 {
     /**
      * Constructor method
@@ -15,6 +14,16 @@ class Filesystem implements FilesystemInterface
      * @param string $path
      */
     public function __construct($path)
+    {
+        $this->setUpFlySystem($path);
+    }
+
+    /**
+     * Set up the flysystem instance
+     * 
+     * @return void
+     */
+    protected function setUpFlySystem($path)
     {
         $this->flysystem = new Flysystem(new FlysystemAdapter($path));
         $this->flysystem->addPlugin(new ListFiles);

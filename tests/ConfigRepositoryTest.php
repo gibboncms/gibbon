@@ -2,20 +2,20 @@
 
 namespace GibbonCms\Gibbon\Tests;
 
-use GibbonCms\Gibbon\Filesystem;
-use GibbonCms\Gibbon\ValueRepository;
+use GibbonCms\Gibbon\Filesystems\PlainFilesystem;
+use GibbonCms\Gibbon\Repositories\ConfigRepository;
 
-class ValueRepositoryTest extends TestCase
+class ConfigRepositoryTest extends TestCase
 {
     function setUp()
     {
-        $this->repository = new ValueRepository(new Filesystem($this->fixtures), 'values.json');
+        $this->repository = new ConfigRepository(new PlainFilesystem($this->fixtures), 'values.json');
     }
 
     /** @test */
     function it_is_initializable()
     {
-        $this->assertInstanceOf(ValueRepository::class, $this->repository);
+        $this->assertInstanceOf(ConfigRepository::class, $this->repository);
     }
 
     /** @test */

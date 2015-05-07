@@ -1,13 +1,13 @@
 <?php
 
-namespace GibbonCms\Gibbon\Interfaces;
+namespace GibbonCms\Gibbon\Repositories;
 
 interface PersistableRepository extends Repository
 {
     /**
      * Delete an entity
      * 
-     * @param mixed
+     * @param \GibbonCms\Gibbon\Entities\Entity
      * @return bool
      */
     public function delete($entity);
@@ -15,15 +15,15 @@ interface PersistableRepository extends Repository
     /**
      * Copy an entity
      * 
-     * @param mixed $entity
-     * @return mixed
+     * @param \GibbonCms\Gibbon\Entities\Entity $entity
+     * @return \GibbonCms\Gibbon\Entities\Entity
      */
     public function copy($entity);
 
     /**
      * Save an entity
      * 
-     * @param mixed
+     * @param \GibbonCms\Gibbon\Entities\Entity $entity
      * @return bool
      */
     public function save($entity);

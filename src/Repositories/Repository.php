@@ -1,21 +1,21 @@
 <?php
 
-namespace GibbonCms\Gibbon\Interfaces;
+namespace GibbonCms\Gibbon\Repositories;
 
 interface Repository
 {
     /**
      * Find an entity by id
      * 
-     * @param mixed $id
-     * @return mixed
+     * @param \GibbonCms\Gibbon\Entities\Entity $id
+     * @return \GibbonCms\Gibbon\Entities\Entity
      */
     public function find($id);
 
     /**
      * Return all entities
      * 
-     * @return mixed[]
+     * @return \GibbonCms\Gibbon\Entities\Entity[]
      */
     public function getAll();
 }

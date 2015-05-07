@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Interfaces;
+namespace GibbonCms\Gibbon\Factories;
 
 interface Factory
 {
@@ -8,14 +8,14 @@ interface Factory
      * Transform raw data to an entity
      * 
      * @param array $data
-     * @return mixed
+     * @return \GibbonCms\Gibbon\Entity
      */
     public function make($data);
 
     /**
      * Transform an entity to raw data
      * 
-     * @param mixed
+     * @param \GibbonCms\Gibbon\Entities\Entity
      * @return string
      */
     public function encode($entity);
