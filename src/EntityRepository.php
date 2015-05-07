@@ -3,10 +3,10 @@
 namespace GibbonCms\Gibbon;
 
 use GibbonCms\Gibbon\Interfaces\Factory as FactoryInterface;
-use GibbonCms\Gibbon\Interfaces\EntityRepository as EntityRepositoryInterface;
+use GibbonCms\Gibbon\Interfaces\PersistableRepository;
 use ReflectionObject;
 
-class EntityRepository implements EntityRepositoryInterface
+class EntityRepository implements PersistableRepository
 {
     /**
      * The filesystem is used to read and write files

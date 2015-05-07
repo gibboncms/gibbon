@@ -2,7 +2,7 @@
 
 namespace GibbonCms\Gibbon\Interfaces;
 
-interface EntityRepository extends Repository
+interface PersistableRepository extends Repository
 {
     /**
      * Delete an entity
