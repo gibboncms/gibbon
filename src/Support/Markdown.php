@@ -15,7 +15,7 @@ trait Markdown
      * @param string $markdown
      * @return string
      */
-    protected static function parseMarkdown($parkdown)
+    public static function parseMarkdown($markdown)
     {
         if (self::$markdownParser == null) {
             self::$markdownParser = new CommonMarkConverter;

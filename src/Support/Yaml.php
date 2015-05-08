@@ -35,7 +35,7 @@ trait Yaml
      * @param string $yaml
      * @return array
      */
-    protected static function parseYaml($yaml)
+    public static function parseYaml($yaml)
     {
         if (self::$yamlParser == null) {
             self::$yamlParser = new YamlParser;
