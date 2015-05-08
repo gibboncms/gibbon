@@ -10,12 +10,12 @@ trait FactoryHelpers
     /*
     * @var \League\CommonMark\CommonMarkConverter
     */
-    protected $markdownParser;
+    protected static $markdownParser;
 
     /*
     * @var \Symfony\Component\Yaml\Yaml
     */
-    protected $yamlParser;
+    protected static $yamlParser;
 
     /**
      * Create a new entity instance and return it filled with attributes
@@ -93,13 +93,13 @@ trait FactoryHelpers
      * 
      * @return \League\CommonMark\CommonMarkConverter
      */
-    protected function getMarkdownParser()
+    protected static function getMarkdownParser()
     {
-        if ($this->markdownParser == null) {
-            $this->markdownParser = new CommonMarkConverter;
+        if (self::$markdownParser == null) {
+            self::$markdownParser = new CommonMarkConverter;
         }
 
-        return $this->markdownParser;
+        return self::$markdownParser;
     }
 
     /**
@@ -107,12 +107,12 @@ trait FactoryHelpers
      * 
      * @return \League\CommonMark\CommonMarkConverter
      */
-    protected function yamlParser()
+    protected static function yamlParser()
     {
-        if ($this->yamlParser == null) {
-            $this->yamlParser = new Yaml;
+        if (self::$yamlParser == null) {
+            self::$yamlParser = new Yaml;
         }
 
-        return $this->yamlParser;
+        return self::$yamlParser;
     }
 }
