@@ -3,7 +3,7 @@
 namespace GibbonCms\Gibbon\Tests\Stubs;
 
 use GibbonCms\Gibbon\Factories\Factory;
-use GibbonCms\Gibbon\Factories\FactoryHelpers;
+use GibbonCms\Gibbon\Support\FactoryHelpers;
 
 class EntityFactory implements Factory
 {

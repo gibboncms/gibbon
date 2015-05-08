@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Factories;
+namespace GibbonCms\Gibbon\Support;
 
 use League\CommonMark\CommonMarkConverter;
 use Symfony\Component\Yaml\Yaml;
