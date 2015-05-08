@@ -6,23 +6,18 @@ trait DataSeparation
      * Split data by the separator
      * 
      * @param string $data
-     * @param array $parts
+     * @param array $sectionNames
      * @return array
      */
-    protected function splitData($data, $parts)
+    protected function splitData($data, $sectionNames)
     {
-        $array = explode(
+        $sections = explode(
             $this->getDataSeparator(),
             str_replace("\n\r", "\n", $data),
-            count($parts)
+            count($sectionNames)
         );
 
-        $i = 0;
-
-        return array_reduce($array, function($carry, $part) use ($i) {
-            $carry[$parts[$i]] = $part;
-            return $carry;
-        }, []);
+        return array_combine($sectionNames, $sections);
     }
 
     /**
@@ -32,6 +27,6 @@ trait DataSeparation
      */
     protected function getDataSeparator()
     {
-        return "\n\n===n\n";
+        return "\n\n===\n\n";
     }
 }
