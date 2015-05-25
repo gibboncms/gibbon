@@ -2,6 +2,8 @@
 
 namespace GibbonCms\Gibbon\Modules;
 
+use GibbonCms\Gibbon\Exceptions\ModuleDoesntExistException;
+
 class ModuleBag
 {
     /**
@@ -12,12 +14,28 @@ class ModuleBag
     /**
      * Register a module
      * 
+     * @param  string $key
      * @param  \GibbonCms\Gibbon\Modules\Module $module
      * @return void
      */
-    public function register(Module $module)
+    public function register($key, Module $module)
     {
-        $this->modules[] = $module;
+        $this->modules[$key] = $module;
+    }
+
+    /**
+     * Retrieve a registered module
+     * 
+     * @param  string $key
+     * @return \GibbonCms\Gibbon\Modules\Module
+     */
+    public function get($key)
+    {
+        if (!isset($this->modules[$key])) {
+            throw new ModuleDoesntExistException($key);
+        }
+        
+        return $this->modules[$key];
     }
 
     /**

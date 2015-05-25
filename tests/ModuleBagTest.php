@@ -22,27 +22,43 @@ class ModuleBagTest extends TestCase
     public function it_registers_modules()
     {
         $module = $this->getMock(Module::class);
-        $this->moduleBag->register($module);
+        $this->moduleBag->register('module', $module);
 
         $this->assertCount(1, $this->moduleBag->all());
 
         $anotherModule = $this->getMock(Module::class);
-        $this->moduleBag->register($anotherModule);
+        $this->moduleBag->register('another-module', $anotherModule);
 
         $this->assertCount(2, $this->moduleBag->all());
+    }
+
+    /** @test */
+    public function it_retrieves_modules()
+    {
+        $module = $this->getMock(Module::class);
+        $this->moduleBag->register('module', $module);
+
+        $this->assertEquals($module, $this->moduleBag->get('module'));
+    }
+
+    /** @test */
+    public function it_throws_an_exception_when_retrieving_inexistent_module()
+    {
+        $this->setExpectedException('GibbonCms\Gibbon\Exceptions\ModuleDoesntExistException');
+
+        $this->moduleBag->get('module');
     }
 
     /** @test */
     public function it_sets_up_all_modules()
     {
         $module = $this->getMock(Module::class);
-        $anotherModule = $this->getMock(Module::class);
-
         $module->expects($this->once())->method('setUp');
+        $anotherModule = $this->getMock(Module::class);
         $anotherModule->expects($this->once())->method('setUp');
 
-        $this->moduleBag->register($module);
-        $this->moduleBag->register($anotherModule);
+        $this->moduleBag->register('module', $module);
+        $this->moduleBag->register('another-module', $anotherModule);
         
         $this->moduleBag->setUp();
     }
