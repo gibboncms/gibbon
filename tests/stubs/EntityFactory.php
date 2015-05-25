@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Tests\Stubs;
+namespace GibbonCms\Gibbon\Test\Stubs;
 
 use GibbonCms\Gibbon\Factories\Factory;
 use GibbonCms\Gibbon\Support\FactoryHelpers;

@@ -1,16 +1,16 @@
 <?php
 
-namespace GibbonCms\Gibbon\Tests;
+namespace GibbonCms\Gibbon\Test;
 
 use GibbonCms\Gibbon\Filesystems\FileCache;
 use GibbonCms\Gibbon\Filesystems\PlainFilesystem;
 use GibbonCms\Gibbon\Repositories\PersistableFileRepository;
-use GibbonCms\Gibbon\Tests\Stubs\Entity;
-use GibbonCms\Gibbon\Tests\Stubs\EntityFactory;
+use GibbonCms\Gibbon\Test\Stubs\Entity;
+use GibbonCms\Gibbon\Test\Stubs\EntityFactory;
 
 class PersistableFileRepositoryTest extends TestCase
 {
-    function setUp()
+    public function setUp()
     {
         $this->repository = new PersistableFileRepository(
             new PlainFilesystem($this->fixtures . '/entities/'),
@@ -22,13 +22,13 @@ class PersistableFileRepositoryTest extends TestCase
     }
 
     /** @test */
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->assertInstanceOf(PersistableFileRepository::class, $this->repository);
     }
 
     /** @test */
-    function it_saves_an_entity()
+    public function it_saves_an_entity()
     {
         $entity = new Entity;
         $this->assertTrue($this->repository->save($entity));
@@ -42,7 +42,7 @@ class PersistableFileRepositoryTest extends TestCase
     }
 
     /** @test */
-    function it_updates_an_existing_entity()
+    public function it_updates_an_existing_entity()
     {
         $entity = new Entity;
         $this->repository->save($entity);
@@ -56,7 +56,7 @@ class PersistableFileRepositoryTest extends TestCase
     }
 
     /** @test */
-    function it_deletes_an_entity()
+    public function it_deletes_an_entity()
     {
         $entity = new Entity('stub', 'lorem ipsum dolor sit');
         $this->repository->save($entity);
@@ -64,7 +64,7 @@ class PersistableFileRepositoryTest extends TestCase
     }
 
     /** @test */
-    function it_can_copy_an_entity()
+    public function it_can_copy_an_entity()
     {
         $entity = $this->repository->find(1);
         $copy = $this->repository->copy($entity);

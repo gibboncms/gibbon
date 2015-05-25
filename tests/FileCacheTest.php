@@ -1,24 +1,24 @@
 <?php
 
-namespace GibbonCms\Gibbon\Tests;
+namespace GibbonCms\Gibbon\Test;
 
 use GibbonCms\Gibbon\Filesystems\FileCache;
 
 class FileCacheTest extends TestCase
 {
-    function setUp()
+    public function setUp()
     {
         $this->cache = new FileCache($this->fixtures . '/entities/.cache');
     }
     
     /** @test */
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->assertInstanceOf(FileCache::class, $this->cache);
     }
 
     /** @test */
-    function it_puts_and_gets_a_value()
+    public function it_puts_and_gets_a_value()
     {
         $this->cache->put('foo', 'bar');
         $this->assertEquals('bar', $this->cache->get('foo'));
@@ -35,7 +35,7 @@ class FileCacheTest extends TestCase
     }
 
     /** @test */
-    function it_can_clear()
+    public function it_can_clear()
     {
         $this->cache->put('foo', 'bar');
         $this->cache->put('baz', 'sheep');

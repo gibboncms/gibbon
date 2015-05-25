@@ -1,6 +1,6 @@
 <?php
 
-namespace GibbonCms\Gibbon\Tests;
+namespace GibbonCms\Gibbon\Test;
 
 use PHPUnit_Framework_TestCase;
 
