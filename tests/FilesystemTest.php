@@ -25,7 +25,13 @@ class FilesystemTest extends TestCase
     /** @test */
     public function it_lists_files()
     {
-        $this->assertGreaterThan(1, $this->filesystem->listFiles());
+        $this->assertCount(3, $this->filesystem->listFiles());
+    }
+    
+    /** @test */
+    public function it_lists_files_recursively()
+    {
+        $this->assertCount(4, $this->filesystem->listFiles(true));
     }
 
     /** @test */

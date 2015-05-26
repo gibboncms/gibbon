@@ -7,9 +7,10 @@ interface Filesystem
     /**
      * List all the files from a directory
      * 
+     * @param  bool $recursive
      * @return array
      */
-    public function listFiles();
+    public function listFiles($recursive);
 
     /**
      * Return the contents of a file

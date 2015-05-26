@@ -32,11 +32,12 @@ class PlainFilesystem implements Filesystem
     /**
      * List all the files from a directory
      * 
+     * @param  bool $recursive
      * @return array
      */
-    public function listFiles()
+    public function listFiles($recursive = false)
     {
-        return $this->flysystem->listFiles();
+        return $this->flysystem->listFiles('', $recursive);
     }
 
     /**
