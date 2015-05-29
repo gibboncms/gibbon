@@ -25,6 +25,7 @@
         "league/flysystem": "~1.0",
         "illuminate/support": "~5.0",
         "league/commonmark": "^0.8.0",
-        "symfony/yaml": "^2.6"
+        "symfony/yaml": "^2.6",
+        "league/flysystem-dropbox": "^1.0"
     }
 }

@@ -31,7 +31,7 @@ class FilesystemTest extends TestCase
     /** @test */
     public function it_lists_files_recursively()
     {
-        $this->assertCount(4, $this->filesystem->listFiles(true));
+        $this->assertCount(4, $this->filesystem->listFiles(null, true));
     }
 
     /** @test */

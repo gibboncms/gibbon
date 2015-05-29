@@ -13,7 +13,8 @@ class FileRepositoryTest extends TestCase
     public function setUp()
     {
         $this->repository = new FileRepository(
-            new PlainFilesystem($this->fixtures . '/entities/'),
+            new PlainFilesystem($this->fixtures),
+            'entities',
             new FileCache($this->fixtures . '/entities/.cache'),
             new EntityFactory
         );

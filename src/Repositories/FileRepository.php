@@ -32,13 +32,15 @@ class FileRepository implements Repository
     /**
      * Constructor method injects all dependencies
      * 
-     * @param \GibbonCms\Gibbon\Filesystems\Filesystem $filesystem
-     * @param \GibbonCms\Gibbon\Filesystems\Cache $cache
-     * @param \GibbonCms\Gibbon\Factories\Factory $factory
+     * @param  \GibbonCms\Gibbon\Filesystems\Filesystem $filesystem
+     * @param  string $directory
+     * @param  \GibbonCms\Gibbon\Filesystems\Cache $cache
+     * @param  \GibbonCms\Gibbon\Factories\Factory $factory
      */
-    public function __construct(Filesystem $filesystem, Cache $cache, Factory $factory)
+    public function __construct(Filesystem $filesystem, $directory, Cache $cache, Factory $factory)
     {
         $this->filesystem = $filesystem;
+        $this->directory = $directory;
         $this->factory = $factory;
         $this->cache = $cache;
 
@@ -73,7 +75,7 @@ class FileRepository implements Repository
      */
     public function build()
     {
-        $files = $this->filesystem->listFiles();
+        $files = $this->filesystem->listFiles($this->directory);
 
         $this->cache->clear();
 
