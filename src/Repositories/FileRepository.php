@@ -97,8 +97,10 @@ class FileRepository implements Repository
             return null;
         }
 
+        $id = preg_replace("/{$this->directory}\/([^.]+).md/", '\1', $file['path']);
+
         $entity = $this->factory->make([
-            'id'   => $file['filename'],
+            'id'   => $id,
             'data' => $this->filesystem->read($file['path']),
         ]);
         

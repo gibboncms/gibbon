@@ -11,11 +11,6 @@ class FilesystemTest extends TestCase
         $this->filesystem = new PlainFilesystem($this->fixtures . '/entities/');
     }
 
-    public function tearDown()
-    {
-        $this->filesystem = new PlainFilesystem($this->fixtures . '/entities/');
-    }
-
     /** @test */
     public function it_is_initializable()
     {
