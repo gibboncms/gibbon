@@ -10,6 +10,11 @@ class Paginator
     protected $items;
 
     /**
+     * @var int
+     */
+    protected $perPage;
+
+    /**
      * @param  array $items
      * @param  int $perPage
      */
