@@ -1,8 +1,10 @@
-<?php namespace GibbonCms\Gibbon\Support;
+<?php
+
+namespace GibbonCms\Gibbon\Support;
 
 trait FactoryHelpers
 {
-    use Markdown, Yaml, DataSeparation;
+    use Yaml, DataSeparation;
 
     /**
      * Create a new entity instance and return it filled with attributes

@@ -1,4 +1,6 @@
-<?php namespace GibbonCms\Gibbon\Support;
+<?php
+
+namespace GibbonCms\Gibbon\Support;
 
 trait DataSeparation
 {

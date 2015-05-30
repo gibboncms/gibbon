@@ -1,4 +1,6 @@
-<?php namespace GibbonCms\Gibbon\Support;
+<?php
+
+namespace GibbonCms\Gibbon\Support;
 
 use Symfony\Component\Yaml\Yaml as YamlParser;
 
