@@ -11,7 +11,7 @@ interface Filesystem
      * @param  bool $recursive
      * @return array
      */
-    public function listFiles($recursive);
+    public function listFiles($directory, $recursive = false);
 
     /**
      * Return the contents of a file
