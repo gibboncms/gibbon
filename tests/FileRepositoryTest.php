@@ -35,12 +35,27 @@ class FileRepositoryTest extends TestCase
         $this->assertEquals(1, $this->repository->find(1)->getIdentifier());
     }
 
-    /** 
-     * @test
-     */
+    /** @test */
     public function it_returns_all_entities()
     {
         $this->assertCount(2, $this->repository->getAll());
         $this->assertContainsOnlyInstancesOf(EntityFactory::makes(), $this->repository->getAll());
+    }
+
+    /** @test */
+    public function it_supports_recursive_directories()
+    {
+        $repository = new FileRepository(
+            new PlainFilesystem($this->fixtures),
+            'entities',
+            new FileCache($this->fixtures . '/entities/.cache'),
+            new EntityFactory,
+            true
+        );
+
+        $repository->build();
+
+        $this->assertCount(3, $repository->getAll());
+        $this->assertContainsOnlyInstancesOf(EntityFactory::makes(), $repository->getAll());
     }
 }

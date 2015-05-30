@@ -16,6 +16,13 @@ class FileRepository implements Repository
     protected $filesystem;
 
     /**
+     * The directory in which the filesystem stores the entities
+     * 
+     * @var string
+     */
+    protected $directory;
+
+    /**
      * We're using a cache because file io is slow
      * 
      * @var \GibbonCms\Gibbon\Filesystems\Cache
@@ -30,19 +37,29 @@ class FileRepository implements Repository
     protected $factory;
 
     /**
+     * Recursively go through the filesystem's directory
+     * 
+     * @var bool
+     */
+    protected $recursive;
+
+    /**
      * Constructor method injects all dependencies
      * 
      * @param  \GibbonCms\Gibbon\Filesystems\Filesystem $filesystem
      * @param  string $directory
      * @param  \GibbonCms\Gibbon\Filesystems\Cache $cache
      * @param  \GibbonCms\Gibbon\Factories\Factory $factory
+     * @param  bool $recursive
      */
-    public function __construct(Filesystem $filesystem, $directory, Cache $cache, Factory $factory)
-    {
+    public function __construct(Filesystem $filesystem, $directory, Cache $cache,
+        Factory $factory, $recursive = false
+    ) {
         $this->filesystem = $filesystem;
         $this->directory = $directory;
-        $this->factory = $factory;
         $this->cache = $cache;
+        $this->factory = $factory;
+        $this->recursive = $recursive;
 
         $this->cache->rebuild();
     }
@@ -50,7 +67,7 @@ class FileRepository implements Repository
     /**
      * Find an entity by id
      * 
-     * @param string $id
+     * @param  string $id
      * @return \GibbonCms\Gibbon\Entities\Entity
      */
     public function find($id)
@@ -75,7 +92,7 @@ class FileRepository implements Repository
      */
     public function build()
     {
-        $files = $this->filesystem->listFiles($this->directory);
+        $files = $this->filesystem->listFiles($this->directory, $this->recursive);
 
         $this->cache->clear();
 
@@ -88,7 +105,7 @@ class FileRepository implements Repository
     }
 
     /**
-     * @param array $file
+     * @param  array $file
      * @return \GibbonCms\Gibbon\Entities\Entity|null
      */
     protected function parseFile($file)
