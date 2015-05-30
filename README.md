@@ -3,7 +3,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/gibboncms/gibbon.svg?style=flat-square)](https://packagist.org/packages/gibboncms/gibbon)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/gibboncms/gibbon/master.svg?style=flat-square)](https://travis-ci.org/gibboncms/gibbon)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/gibboncms/gibbon.svg?style=flat-square)](https://scrutinizer-ci.com/g/gibboncms/gibbon/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/gibboncms/gibbon.svg?style=flat-square)](https://scrutinizer-ci.com/g/gibboncms/gibbon)
 [![Total Downloads](https://img.shields.io/packagist/dt/gibboncms/gibbon.svg?style=flat-square)](https://packagist.org/packages/gibboncms/gibbon)
 
