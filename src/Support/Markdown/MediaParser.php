@@ -11,9 +11,6 @@ use League\CommonMark\Util\LinkParserHelper;
 
 class MediaParser extends AbstractInlineParser
 {
-    const MEDIA_IMAGE = 'image';
-    const MEDIA_FILE = 'file';
-
     /**
      * @var string
      */
@@ -70,25 +67,24 @@ class MediaParser extends AbstractInlineParser
 
         $this->cursor->advance();
 
-        $toParse = $this->match();
+        if ($this->cursor->match('/^image/') !== null) {
+            $parts = $this->getInlineParts();
 
-        if ($toParse === null) {
-            return $this->cancel();
+            if (!$parts) {
+                return $this->cancel();
+            }
+
+            $element = new Image($this->mediaRoot.'/'.$parts['url'], $parts['label']);
         }
 
-        $label = $this->getLabel();
-        $url = $this->getUrl();
+        if ($this->cursor->match('/^file/') !== null) {
+            $parts = $this->getInlineParts();
 
-        if ($label === null || $url === null) {
-            return $this->cancel();
-        }
+            if (!$parts) {
+                return $this->cancel();
+            }
 
-        if ($toParse === self::MEDIA_IMAGE) {
-            $element = new Image($this->mediaRoot.'/'.$url, $label);
-        }
-
-        if ($toParse === self::MEDIA_FILE) {
-            $element = new Link($this->mediaRoot.'/'.$url, $label);
+            $element = new Link($this->mediaRoot.'/'.$parts['url'], $parts['label']);
         }
 
         if (!isset($element)) {
@@ -101,19 +97,14 @@ class MediaParser extends AbstractInlineParser
     }
 
     /**
-     * @return string|null
+     * @return array|null
      */
-    public function match()
+    protected function getInlineParts()
     {
-        if ($this->cursor->match('/^image/') !== null) {
-            return self::MEDIA_IMAGE;
-        }
+        $label = trim($this->cursor->match('/^\[(?:[^\\\\\[\]]|\\\\[\[\]]){0,750}\]/'), '[]');
+        $url   = trim(LinkParserHelper::parseLinkDestination($this->cursor), '()');
 
-        if ($this->cursor->match('/^file/') !== null) {
-            return self::MEDIA_FILE;
-        }
-
-        return null;
+        return ($label && $url) ? compact('label', 'url') : null;
     }
 
     /**
@@ -124,21 +115,5 @@ class MediaParser extends AbstractInlineParser
         $this->cursor->restoreState($this->originalState);
         
         return false;
-    }
-
-    /**
-     * @return string|null
-     */
-    protected function getLabel()
-    {
-        return trim($this->cursor->match('/^\[(?:[^\\\\\[\]]|\\\\[\[\]]){0,750}\]/'), '[]');
-    }
-
-    /**
-     * @return string|null
-     */
-    protected function getUrl()
-    {
-        return trim(LinkParserHelper::parseLinkDestination($this->cursor), '()');
     }
 }
