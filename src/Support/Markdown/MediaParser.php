@@ -70,7 +70,7 @@ class MediaParser extends AbstractInlineParser
         if ($this->cursor->match('/^image/') !== null) {
             $parts = $this->getInlineParts();
 
-            if (!$parts) {
+            if (empty($parts)) {
                 return $this->cancel();
             }
 
@@ -80,7 +80,7 @@ class MediaParser extends AbstractInlineParser
         if ($this->cursor->match('/^file/') !== null) {
             $parts = $this->getInlineParts();
 
-            if (!$parts) {
+            if (empty($parts)) {
                 return $this->cancel();
             }
 
