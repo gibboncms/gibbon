@@ -21,17 +21,6 @@ class EntityFactory implements Factory
     }
 
     /**
-     * Transform an entity to raw data
-     * 
-     * @param mixed
-     * @return string
-     */
-    public function encode($entity)
-    {
-        return $entity->data;
-    }
-
-    /**
      * Return the classname of the entity this factory makes
      * 
      * @return string
