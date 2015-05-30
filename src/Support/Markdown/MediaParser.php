@@ -67,23 +67,23 @@ class MediaParser extends AbstractInlineParser
 
         $this->cursor->advance();
 
-        if ($this->cursor->match('/^image/') !== null) {
-            $parts = $this->getInlineParts();
+        $mediaType = $this->cursor->match('/^image/') ?: $this->cursor->match('/^file/');
 
-            if (empty($parts)) {
-                return $this->cancel();
-            }
+        if ($mediaType === null) {
+            return $this->cancel();
+        }
 
+        $parts = $this->getInlineParts();
+
+        if (empty($parts)) {
+            return $this->cancel();
+        }
+
+        if ($mediaType === 'image') {
             $element = new Image($this->mediaRoot.'/'.$parts['url'], $parts['label']);
         }
 
-        if ($this->cursor->match('/^file/') !== null) {
-            $parts = $this->getInlineParts();
-
-            if (empty($parts)) {
-                return $this->cancel();
-            }
-
+        if ($mediaType === 'file') {
             $element = new Link($this->mediaRoot.'/'.$parts['url'], $parts['label']);
         }
 
