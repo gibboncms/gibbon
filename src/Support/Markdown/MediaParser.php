@@ -35,7 +35,7 @@ class MediaParser extends AbstractInlineParser
     protected $cursor;
 
     /**
-     * @var \League\CommonMark\Cursor
+     * @var \League\CommonMark\CursorState
      */
     protected $originalState;
 
@@ -105,11 +105,11 @@ class MediaParser extends AbstractInlineParser
      */
     public function match()
     {
-        if ($this->cursor->match('/^image/') != null) {
+        if ($this->cursor->match('/^image/') !== null) {
             return self::MEDIA_IMAGE;
         }
 
-        if ($this->cursor->match('/^file/') != null) {
+        if ($this->cursor->match('/^file/') !== null) {
             return self::MEDIA_FILE;
         }
 
