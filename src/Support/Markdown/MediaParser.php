@@ -15,6 +15,31 @@ class MediaParser extends AbstractInlineParser
     const MEDIA_FILE = 'file';
 
     /**
+     * @var string
+     */
+    protected $mediaRoot;
+
+    /**
+     * @var \League\CommonMark\ContextInterface
+     */
+    protected $context;
+
+    /**
+     * @var \League\CommonMark\InlineParserContext
+     */
+    protected $inlineContext;
+
+    /**
+     * @var \League\CommonMark\Cursor
+     */
+    protected $cursor;
+
+    /**
+     * @var \League\CommonMark\Cursor
+     */
+    protected $originalState;
+
+    /**
      * @param  string $mediaRoot
      */
     public function __construct($mediaRoot)
@@ -31,8 +56,8 @@ class MediaParser extends AbstractInlineParser
     }
 
     /**
-     * @param  League\CommonMark\ContextInterface $context
-     * @param  League\CommonMark\InlineParserContext $inlineContext
+     * @param  \League\CommonMark\ContextInterface $context
+     * @param  \League\CommonMark\InlineParserContext $inlineContext
      * @return bool
      */
     public function parse(ContextInterface $context, InlineParserContext $inlineContext)
@@ -41,28 +66,28 @@ class MediaParser extends AbstractInlineParser
         $this->inlineContext = $inlineContext;
 
         $this->cursor = $inlineContext->getCursor();
-        $originalState = $this->cursor->saveState();
+        $this->originalState = $this->cursor->saveState();
 
         $this->cursor->advance();
 
         $toParse = $this->match();
 
-        if ($toParse == null) {
+        if ($toParse === null) {
             return $this->cancel();
         }
 
         $label = $this->getLabel();
         $url = $this->getUrl();
 
-        if ($label == null || $url == null) {
+        if ($label === null || $url === null) {
             return $this->cancel();
         }
 
-        if ($toParse == self::MEDIA_IMAGE) {
+        if ($toParse === self::MEDIA_IMAGE) {
             $element = new Image($this->mediaRoot.'/'.$url, $label);
         }
 
-        if ($toParse == self::MEDIA_FILE) {
+        if ($toParse === self::MEDIA_FILE) {
             $element = new Link($this->mediaRoot.'/'.$url, $label);
         }
 
@@ -96,7 +121,7 @@ class MediaParser extends AbstractInlineParser
      */
     protected function cancel()
     {
-        $cursor->restoreState($originalState);
+        $this->cursor->restoreState($this->originalState);
         
         return false;
     }

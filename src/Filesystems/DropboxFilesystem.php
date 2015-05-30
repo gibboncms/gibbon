@@ -12,7 +12,7 @@ class DropboxFilesystem extends FlyFilesystem implements Filesystem
     /**
      * Constructor method
      * 
-     * @param string $path
+     * @param string $token
      */
     public function __construct($token)
     {

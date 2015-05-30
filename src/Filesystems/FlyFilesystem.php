@@ -9,8 +9,14 @@ use League\Flysystem\Plugin\ListFiles;
 abstract class FlyFilesystem implements Filesystem
 {
     /**
+     * @var \League\Flysystem\Filesystem
+     */
+    protected $flysystem;
+    
+    /**
      * List all the files from a directory
      * 
+     * @param  string $directory
      * @param  bool $recursive
      * @return array
      */

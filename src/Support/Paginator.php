@@ -5,6 +5,11 @@ namespace GibbonCms\Gibbon\Support;
 class Paginator
 {
     /**
+     * @var array
+     */
+    protected $items;
+
+    /**
      * @param  array $items
      * @param  int $perPage
      */

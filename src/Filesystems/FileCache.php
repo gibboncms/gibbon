@@ -21,7 +21,7 @@ class FileCache implements Cache
     /**
      * Constructor method
      * 
-     * @param string $directory
+     * @param  string $file
      */
     public function __construct($file)
     {
@@ -43,7 +43,7 @@ class FileCache implements Cache
     /**
      * Get an object from the cache
      * 
-     * @param string $key
+     * @param  string $key
      * @return mixed
      */
     public function get($key)
@@ -54,8 +54,8 @@ class FileCache implements Cache
     /**
      * Place an object in the cache
      * 
-     * @param string $key
-     * @param mixed $value
+     * @param  string $key
+     * @param  mixed $value
      * @return void
      */
     public function put($key, $value)
@@ -66,7 +66,7 @@ class FileCache implements Cache
     /**
      * Forget an object in the cache
      * 
-     * @param string $key
+     * @param  string $key
      * @return void
      */
     public function forget($key)
@@ -105,7 +105,9 @@ class FileCache implements Cache
             try {
                 $this->data = unserialize(file_get_contents($this->file));
                 return true;
-            } catch (\Exception $e) { }
+            } catch (\Exception $e) {
+                // Try just used to suppress the exception. If the cache is corrupted we just start from scratch.
+            }
         }
 
         $this->data = [];

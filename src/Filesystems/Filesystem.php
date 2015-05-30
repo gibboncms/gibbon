@@ -7,6 +7,7 @@ interface Filesystem
     /**
      * List all the files from a directory
      * 
+     * @param  string $directory
      * @param  bool $recursive
      * @return array
      */

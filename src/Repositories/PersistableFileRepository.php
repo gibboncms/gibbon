@@ -15,7 +15,7 @@ class PersistableFileRepository extends FileRepository implements PersistableRep
         $fresh = is_null($entity->id);
 
         if ($fresh) {
-            $entity->id = $this->generateId();
+            $entity->id = (string) $this->generateId();
         }
 
         $success = $this->filesystem->put(
