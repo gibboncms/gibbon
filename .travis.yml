@@ -9,6 +9,8 @@ matrix:
   allow_failures:
     - php: 7.0
 
+install: travis_retry composer install --no-interaction --prefer-source
+
 before_script:
   - travis_retry composer self-update
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
