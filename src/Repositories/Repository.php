@@ -7,7 +7,7 @@ interface Repository
     /**
      * Find an entity by id
      * 
-     * @param  int $id
+     * @param  string $id
      * @return \GibbonCms\Gibbon\Entities\Entity
      */
     public function find($id);
