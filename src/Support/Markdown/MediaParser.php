@@ -67,44 +67,71 @@ class MediaParser extends AbstractInlineParser
 
         $this->cursor->advance();
 
+        return $this->parseMediaType();
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function parseMediaType()
+    {
         $mediaType = $this->cursor->match('/^image/') ?: $this->cursor->match('/^file/');
 
         if ($mediaType === null) {
             return $this->cancel();
         }
 
-        $parts = $this->getInlineParts();
+        return $this->getElementParts($mediaType);
+    }
 
-        if (empty($parts)) {
+    /**
+     * @param  string $mediaType
+     * @return mixed
+     */
+    protected function getElementParts($mediaType)
+    {
+        $label = trim($this->cursor->match('/^\[(?:[^\\\\\[\]]|\\\\[\[\]]){0,750}\]/'), '[]');
+        $url   = trim(LinkParserHelper::parseLinkDestination($this->cursor), '()');
+
+        if ($label === null || $url === null) {
             return $this->cancel();
         }
 
+        return $this->getElement($mediaType, $label, $url);
+    }
+
+    /**
+     * @param  string $mediaType
+     * @param  string $label
+     * @param  string $url
+     * @return mixed
+     */
+    protected function getElement($mediaType, $label, $url)
+    {
         if ($mediaType === 'image') {
-            $element = new Image($this->mediaRoot.'/'.$parts['url'], $parts['label']);
+            $element = new Image($this->mediaRoot.'/'.$url, $label);
         }
 
         if ($mediaType === 'file') {
-            $element = new Link($this->mediaRoot.'/'.$parts['url'], $parts['label']);
+            $element = new Link($this->mediaRoot.'/'.$url, $label);
         }
 
         if (!isset($element)) {
             return $this->cancel();
         }
 
-        $this->inlineContext->getInlines()->add($element);
-
-        return true;
+        return $this->addElement($element);
     }
 
     /**
-     * @return array|null
+     * @param  \League\CommonMark\Inline\Element\AbstractWebResource $element
+     * @return bool
      */
-    protected function getInlineParts()
+    protected function addElement($element)
     {
-        $label = trim($this->cursor->match('/^\[(?:[^\\\\\[\]]|\\\\[\[\]]){0,750}\]/'), '[]');
-        $url   = trim(LinkParserHelper::parseLinkDestination($this->cursor), '()');
-
-        return ($label && $url) ? compact('label', 'url') : null;
+        $this->inlineContext->getInlines()->add($element);
+        
+        return true;
     }
 
     /**
