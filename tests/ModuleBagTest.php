@@ -42,6 +42,15 @@ class ModuleBagTest extends TestCase
     }
 
     /** @test */
+    public function it_retrieves_modules_through_properties()
+    {
+        $module = $this->getMock(Module::class);
+        $this->moduleBag->register('module', $module);
+
+        $this->assertEquals($module, $this->moduleBag->module);
+    }
+
+    /** @test */
     public function it_throws_an_exception_when_retrieving_inexistent_module()
     {
         $this->setExpectedException('GibbonCms\Gibbon\Exceptions\ModuleDoesntExistException');
