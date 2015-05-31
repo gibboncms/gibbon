@@ -2,6 +2,7 @@
 
 namespace GibbonCms\Gibbon\Repositories;
 
+use GibbonCms\Gibbon\Exceptions\EntityParseException;
 use GibbonCms\Gibbon\Factories\Factory;
 use GibbonCms\Gibbon\Filesystems\Cache;
 use GibbonCms\Gibbon\Filesystems\Filesystem;
@@ -116,11 +117,28 @@ class FileRepository implements Repository
 
         $id = preg_replace("/{$this->directory}\/([^.]+).md/", '\1', $file['path']);
 
-        $entity = $this->factory->make([
-            'id'   => $id,
-            'data' => $this->filesystem->read($file['path']),
-        ]);
+        $entity = null;
+
+        try {
+            $entity = $this->factory->make([
+                'id'   => $id,
+                'data' => $this->filesystem->read($file['path']),
+            ]);
+        } catch (EntityParseException $e) {
+            $this->handleEntityParseException($file['path']);
+        }
         
         return $entity;
+    }
+
+    /**
+     * Handle EntityParseExceptions. Fails silently and continues by default.
+     * 
+     * @param  string $path
+     * @return void
+     */
+    protected function handleEntityParseException($path)
+    {
+        return;
     }
 }

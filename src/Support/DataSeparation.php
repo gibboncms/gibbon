@@ -2,6 +2,8 @@
 
 namespace GibbonCms\Gibbon\Support;
 
+use GibbonCms\Gibbon\Exceptions\EntityParseException;
+
 trait DataSeparation
 {
     /**
@@ -19,7 +21,13 @@ trait DataSeparation
             count($sectionNames)
         );
 
-        return array_combine($sectionNames, $sections);
+        try {
+            $parts = array_combine($sectionNames, $sections);
+        } catch (\Exception $e) {
+            throw new EntityParseException;
+        }
+
+        return $parts;
     }
 
     /**
@@ -29,6 +37,6 @@ trait DataSeparation
      */
     protected function getDataSeparator()
     {
-        return "\n\n===\n\n";
+        return "---\n\n";
     }
 }
