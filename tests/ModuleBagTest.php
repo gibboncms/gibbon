@@ -50,6 +50,12 @@ class ModuleBagTest extends TestCase
     }
 
     /** @test */
+    public function it_returns_itself_if_no_key_is_provided()
+    {
+        $this->assertInstanceOf(ModuleBag::class, $this->moduleBag->get());
+    }
+
+    /** @test */
     public function it_sets_up_all_modules()
     {
         $module = $this->getMock(Module::class);

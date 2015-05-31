@@ -26,11 +26,15 @@ class ModuleBag
     /**
      * Retrieve a registered module
      * 
-     * @param  string $key
-     * @return \GibbonCms\Gibbon\Modules\Module
+     * @param  string|null $key
+     * @return \GibbonCms\Gibbon\Modules\Module|self
      */
-    public function get($key)
+    public function get($key = null)
     {
+        if ($key === null) {
+            return $this;
+        }
+        
         if (!isset($this->modules[$key])) {
             throw new ModuleDoesntExistException($key);
         }
