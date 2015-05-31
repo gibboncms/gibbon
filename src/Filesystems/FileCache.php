@@ -91,6 +91,15 @@ class FileCache implements Cache
      */
     public function persist()
     {
+        $parts = explode('/', $this->file);
+        array_pop($parts);
+
+        $dir = implode('/', $parts);
+
+        if (!is_dir($dir)) {
+            mkdir($dir, 493, true);
+        }
+
         return file_put_contents($this->file, serialize($this->data));
     }
 
